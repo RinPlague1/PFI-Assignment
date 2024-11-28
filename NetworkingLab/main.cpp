@@ -3,8 +3,15 @@
 #include <iostream>
 #include <vector>
 
- 
+#include "Window.h"
+#include <FL/Fl.H>
 
+ 
+void onClick(Fl_Widget* _widget, void* _userData)
+{
+	Fl_Window* win = (Fl_Window*)_userData;
+	win->hide();
+}
 
 int main()
 {
@@ -42,6 +49,12 @@ int main()
 			}
 		}
 
+		Window mainWindow;
+
+		mainWindow.show();
+
+
+		return Fl::run();
 
 		//printf("Tick...\n");
 		Sleep(1000);
