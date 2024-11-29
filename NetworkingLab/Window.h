@@ -12,13 +12,14 @@
 #include <Fl/Fl_PNG_Image.H>
 #include <Fl/Fl_Menu_Bar.H>
 
+#include "Server.h"
+
 class Window :
     public Fl_Window
 {
 private:
 	Fl_Button m_close;
 	Fl_Box m_img;
-	Fl_PNG_Image m_titusSelfie;
 
 	Fl_Button m_ServerButton;
 	Fl_Button m_ClientButton;
@@ -27,8 +28,7 @@ private:
 	Fl_Box m_textBox;
 	Fl_Box m_buttonBox;
 
-	Fl_PNG_Image m_steamLogo;
-	Fl_PNG_Image m_steamIcon;
+	Server* m_Server;
 
 	Fl_Menu_Bar m_menuBar;
 

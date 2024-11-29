@@ -8,11 +8,7 @@ Window::Window() :
 	, m_logoBox(0, 0, 215, 420)
 	, m_textBox(215, 0, 425, 420)
 	, m_buttonBox(0, 420, 640, 60)
-	, m_steamIcon("steamIcon.png")
-	, m_steamLogo("steamLogo.png")
 	, m_menuBar(0,0,640,30)
-	
-	, m_titusSelfie("titusSelfie.png")
 	, m_close(10, 10, 120, 30, "close")
 	, m_img(100, 100, 100, 100, "Woah")
 
@@ -29,12 +25,9 @@ Window::Window() :
 	m_img.box(FL_DOWN_BOX);
 	m_img.color(fl_rgb_color(123, 45, 234));
 
-	if (m_titusSelfie.fail())
-	{
-		throw std::runtime_error("Failed");
-	}
 
-	m_img.image(m_titusSelfie);
+
+
 	
 }
 
@@ -51,7 +44,9 @@ void Window::closeOnClick(Fl_Widget* _widget, void* _userData)
 
 void Window::createServerOnClick(Fl_Widget* _widget, void* _userData)
 {
-
+	Window* mainWindow = (Window*)_userData;
+	mainWindow->m_Server = new Server();
+	std::cout << "server created";
 }
 
 void Window::joinServerOnClick(Fl_Widget* _widget, void* _userData)

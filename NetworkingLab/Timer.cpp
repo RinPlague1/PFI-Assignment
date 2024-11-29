@@ -2,18 +2,25 @@
 
 #include <FL/FL.h>
 
-void Timer::tick(void* _userdata)
+
+
+Timer::Timer(float _duration) : m_duration(_duration)
 {
-	printf("Tick!\n");
-	Fl::repeat_timeout(1.0, on_tick, _userdata);
-}
-Timer::Timer(double _duration)
-{
-	Fl::add_timeout(_duration, on_tick, this);
+	
+	Fl::add_timeout(_duration, tick, this);
 }
 Timer::~Timer()
 {
-	Fl::remove_timeout(on_tick, this);
+	Fl::remove_timeout(tick, this);
+}
+
+
+void Timer::tick(void* _userdata)
+{
+	Timer* self = (Timer*)_userdata;
+	
+	self->on_tick();
+	Fl::repeat_timeout(self->m_duration, tick, _userdata);
 }
 
 void Timer::on_tick() {}

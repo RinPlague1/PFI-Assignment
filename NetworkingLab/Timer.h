@@ -1,18 +1,18 @@
 #pragma once
 
-
-
 #ifndef _TIMER_
 #define _TIMER_
 struct Timer
 {
-	Timer(double _duration);
+
+	virtual void on_tick();
+	Timer(float _duration);
 	~Timer();
-	static void on_tick();
+	
 
 private:
 	void* m_userdata;
-	double m_duration;
+	float m_duration;
 	static void tick(void* _userdata);
 };
 

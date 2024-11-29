@@ -141,6 +141,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Client.cpp" />
     <ClCompile Include="ClientSocket.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Server.cpp" />
@@ -150,6 +151,7 @@
     <ClCompile Include="Wsa.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Client.h" />
     <ClInclude Include="ClientSocket.h" />
     <ClInclude Include="Server.h" />
     <ClInclude Include="ServerSocket.h" />

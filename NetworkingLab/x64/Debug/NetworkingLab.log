@@ -1,5 +1,2 @@
-﻿  Window.cpp
-  main.cpp
-  Generating Code...
-LINK : warning LNK4098: defaultlib 'MSVCRT' conflicts with use of other libs; use /NODEFAULTLIB:library
-  NetworkingLab.vcxproj -> D:\S5611581\project\working-networking-lab\x64\Debug\NetworkingLab.exe
+﻿  Server.cpp
+  NetworkingLab.vcxproj -> D:\S5611581\pfi assignment\PFI-Assignment\x64\Debug\NetworkingLab.exe
