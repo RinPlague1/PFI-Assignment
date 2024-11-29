@@ -14,11 +14,24 @@
 
 #include "Server.h"
 
+enum windowState
+{
+	menu = 0,
+	hosting = 1,
+	join = 2,
+	profile = 3,
+	postBattle = 4
+};
+
+
+
 class Window :
     public Fl_Window
 {
 private:
-	Fl_Button m_close;
+	windowState m_currentState;
+
+
 	Fl_Box m_img;
 
 	Fl_Button m_ServerButton;
@@ -29,6 +42,7 @@ private:
 	Fl_Box m_buttonBox;
 
 	Server* m_Server;
+	
 
 	Fl_Menu_Bar m_menuBar;
 
@@ -36,7 +50,6 @@ public:
 	Window();
 	~Window();
 
-	static void closeOnClick(Fl_Widget* _widget, void* _userData);
 	static void createServerOnClick(Fl_Widget* _widget, void* _userData);
 	static void joinServerOnClick(Fl_Widget* _widget, void* _userData);
 

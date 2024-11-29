@@ -15,11 +15,9 @@ void onClick(Fl_Widget* _widget, void* _userData)
 
 int main()
 {
-
-
 		Window mainWindow;
-
 		mainWindow.show();
+
 
 
 		return Fl::run();
