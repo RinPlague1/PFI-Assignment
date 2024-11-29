@@ -19,8 +19,8 @@ enum windowState
 	menu = 0,
 	hosting = 1,
 	join = 2,
-	profile = 3,
-	postBattle = 4
+	room = 3,
+	
 };
 
 

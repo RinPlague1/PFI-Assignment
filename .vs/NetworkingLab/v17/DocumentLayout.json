@@ -3,16 +3,16 @@
   "WorkspaceRootPath": "D:\\S5611581\\pfi assignment\\PFI-Assignment\\",
   "Documents": [
     {
+      "AbsoluteMoniker": "D:0:0:{B532D537-F099-4308-BA83-CF59D41B617B}|NetworkingLab\\NetworkingLab.vcxproj|D:\\S5611581\\pfi assignment\\PFI-Assignment\\NetworkingLab\\Window.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{B532D537-F099-4308-BA83-CF59D41B617B}|NetworkingLab\\NetworkingLab.vcxproj|solutionrelative:NetworkingLab\\Window.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
       "AbsoluteMoniker": "D:0:0:{B532D537-F099-4308-BA83-CF59D41B617B}|NetworkingLab\\NetworkingLab.vcxproj|D:\\S5611581\\pfi assignment\\PFI-Assignment\\NetworkingLab\\Window.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
       "RelativeMoniker": "D:0:0:{B532D537-F099-4308-BA83-CF59D41B617B}|NetworkingLab\\NetworkingLab.vcxproj|solutionrelative:NetworkingLab\\Window.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{B532D537-F099-4308-BA83-CF59D41B617B}|NetworkingLab\\NetworkingLab.vcxproj|D:\\S5611581\\pfi assignment\\PFI-Assignment\\NetworkingLab\\Server.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
       "RelativeMoniker": "D:0:0:{B532D537-F099-4308-BA83-CF59D41B617B}|NetworkingLab\\NetworkingLab.vcxproj|solutionrelative:NetworkingLab\\Server.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{B532D537-F099-4308-BA83-CF59D41B617B}|NetworkingLab\\NetworkingLab.vcxproj|D:\\S5611581\\pfi assignment\\PFI-Assignment\\NetworkingLab\\Window.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
-      "RelativeMoniker": "D:0:0:{B532D537-F099-4308-BA83-CF59D41B617B}|NetworkingLab\\NetworkingLab.vcxproj|solutionrelative:NetworkingLab\\Window.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{B532D537-F099-4308-BA83-CF59D41B617B}|NetworkingLab\\NetworkingLab.vcxproj|D:\\S5611581\\pfi assignment\\PFI-Assignment\\NetworkingLab\\main.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
@@ -82,13 +82,13 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 0,
+              "DocumentIndex": 1,
               "Title": "Window.cpp",
               "DocumentMoniker": "D:\\S5611581\\pfi assignment\\PFI-Assignment\\NetworkingLab\\Window.cpp",
               "RelativeDocumentMoniker": "NetworkingLab\\Window.cpp",
               "ToolTip": "D:\\S5611581\\pfi assignment\\PFI-Assignment\\NetworkingLab\\Window.cpp",
               "RelativeToolTip": "NetworkingLab\\Window.cpp",
-              "ViewState": "AQIAAAwAAAAAAAAAAAAAADAAAAAAAAAA",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAADAAAAAAAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
               "WhenOpened": "2024-11-28T09:20:23.47Z",
               "EditorCaption": ""
@@ -103,8 +103,7 @@
               "RelativeToolTip": "NetworkingLab\\ClientSocket.cpp",
               "ViewState": "AQIAAAAAAAAAAAAAAAAAACgAAABBAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
-              "WhenOpened": "2024-10-17T14:20:06.349Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-10-17T14:20:06.349Z"
             },
             {
               "$type": "Document",
@@ -116,8 +115,7 @@
               "RelativeToolTip": "NetworkingLab\\ServerSocket.cpp",
               "ViewState": "AQIAACcAAAAAAAAAAAAEwEQAAAAMAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
-              "WhenOpened": "2024-10-17T13:35:13.736Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-10-17T13:35:13.736Z"
             },
             {
               "$type": "Document",
@@ -141,8 +139,7 @@
               "RelativeToolTip": "NetworkingLab\\main.cpp",
               "ViewState": "AQIAAAAAAAAAAAAAAAAAABQAAAAAAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
-              "WhenOpened": "2024-10-17T13:22:33.73Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-10-17T13:22:33.73Z"
             },
             {
               "$type": "Document",
@@ -166,18 +163,17 @@
               "RelativeToolTip": "NetworkingLab\\Server.cpp",
               "ViewState": "AQIAABoAAAAAAAAAAAAAwDoAAAAnAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
-              "WhenOpened": "2024-11-28T10:43:42.557Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-11-28T10:43:42.557Z"
             }
           ]
         },
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 0,
+          "SelectedChildIndex": 3,
           "Children": [
             {
               "$type": "Document",
-              "DocumentIndex": 1,
+              "DocumentIndex": 2,
               "Title": "Server.h",
               "DocumentMoniker": "D:\\S5611581\\pfi assignment\\PFI-Assignment\\NetworkingLab\\Server.h",
               "RelativeDocumentMoniker": "NetworkingLab\\Server.h",
@@ -214,13 +210,13 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 2,
+              "DocumentIndex": 0,
               "Title": "Window.h",
               "DocumentMoniker": "D:\\S5611581\\pfi assignment\\PFI-Assignment\\NetworkingLab\\Window.h",
               "RelativeDocumentMoniker": "NetworkingLab\\Window.h",
               "ToolTip": "D:\\S5611581\\pfi assignment\\PFI-Assignment\\NetworkingLab\\Window.h",
               "RelativeToolTip": "NetworkingLab\\Window.h",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAACwAAAABAAAA",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAABEAAAABAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
               "WhenOpened": "2024-11-28T09:20:29.945Z",
               "EditorCaption": ""
