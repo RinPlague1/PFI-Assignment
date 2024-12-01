@@ -21,7 +21,7 @@ void Server::on_tick()
 	printf("Server listening on port 8080\n");*/
 
 	
-	//std::cout << "tick";
+	std::cout << "tick";
 	std::shared_ptr<ClientSocket> client = server.accept();
 	if (client)
 	{
@@ -38,7 +38,7 @@ void Server::on_tick()
 		{
 			printf("Message recived: %s\n", message.c_str());
 
-			respond();
+			bounceToClients(message, ci);
 		}
 		if (clients.at(ci)->m_closed)
 		{
@@ -49,14 +49,15 @@ void Server::on_tick()
 	}
 }
 
-void Server::respond()
+void Server::bounceToClients(std::string _message, size_t _ci)
 {
-	char responseBuffer[300];
-	std::cout << "respond to client" << std::endl;
-	std::cin.getline(responseBuffer, 300);
+
 	for (size_t ci = 0; ci < clients.size(); ++ci)
 	{
-		clients.at(ci)->send(responseBuffer);
+		if (ci != _ci)
+		{
+			clients.at(ci)->send(_message);
+		}
 	
 	}
 

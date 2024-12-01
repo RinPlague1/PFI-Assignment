@@ -12,7 +12,10 @@
 #include <Fl/Fl_PNG_Image.H>
 #include <Fl/Fl_Menu_Bar.H>
 
+#include <vector>
+
 #include "Server.h"
+#include "Client.h"
 
 enum windowState
 {
@@ -42,6 +45,7 @@ private:
 	Fl_Box m_buttonBox;
 
 	Server* m_Server;
+	std::vector<Client*> m_clients;
 	
 
 	Fl_Menu_Bar m_menuBar;

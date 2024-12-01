@@ -13,7 +13,7 @@ void onClick(Fl_Widget* _widget, void* _userData)
 	win->hide();
 }
 
-int main()
+int main(int argc, char* argv[])
 {
 		Window mainWindow;
 		mainWindow.show();

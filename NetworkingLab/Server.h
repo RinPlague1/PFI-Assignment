@@ -19,7 +19,7 @@ public:
 	Server();
 	~Server();
 	void on_tick();
-	void respond();
+	void bounceToClients(std::string _message, size_t _ci);
 };
 
 #endif

@@ -17,7 +17,7 @@ ClientSocket::~ClientSocket()
 
 bool ClientSocket::receive(std::string& _message)
 {
-	char buffer[128] = { 0 };
+	char buffer[256] = { 0 };
 	int bytes = ::recv(m_socket, buffer, sizeof(buffer) - 1, 0);
 	if (bytes == SOCKET_ERROR)
 	{
