@@ -1,8 +1,8 @@
-# working networking lab
+# Programming for interaction - chat room assignment
  
-#References
+## References
 
-#images
+### images
 -Dark Angels - https://www.goonhammer.com/start-competing-dark-angels-tactics-9e/ ~ https://d1w82usnq70pt2.cloudfront.net/wp-content/uploads/2021/01/Interrogator_Chaplain.png
 
 -Emperor's Children - https://www.goonhammer.com/start-competing-emperors-children-tactics/ ~ https://d1w82usnq70pt2.cloudfront.net/wp-content/uploads/2020/11/Noise_Marine-676x750.png
