@@ -21,20 +21,20 @@
 
 -Iron Hands - https://www.goonhammer.com/start-competing-iron-hands-tactics/ ~ https://d1w82usnq70pt2.cloudfront.net/wp-content/uploads/2020/11/iron_Hands-750x643.png
 
--World Eaters -  ~ 
+-World Eaters - https://www.goonhammer.com/10th-edition-competitive-faction-focus-world-eaters/ ~ https://d1w82usnq70pt2.cloudfront.net/wp-content/uploads/2020/10/Berserker-750x673.png
 
--Ultramarines -  ~ 
+-Ultramarines - https://www.goonhammer.com/start-competing-ultramarines-tactics/ ~ https://d1w82usnq70pt2.cloudfront.net/wp-content/uploads/2020/11/Primaris_LT_Ultra-750x508.png
 
--Death Guard -  ~ 
+-Death Guard - https://www.goonhammer.com/death-guard-tactics-9th/ ~ https://d1w82usnq70pt2.cloudfront.net/wp-content/uploads/2020/10/PlagueMarine-750x566.png
 
--Thousand Sons -  ~ 
+-Thousand Sons - https://www.goonhammer.com/10th-edition-competitive-faction-focus-thousand-sons/ ~ https://d1w82usnq70pt2.cloudfront.net/wp-content/uploads/2022/01/Scarab_Occult_terminator-1024x850.png
 
--Sons of Horus -  ~ 
+-Sons of Horus (Black Legion) - https://www.goonhammer.com/start-competing-black-legion-tactics/ ~ https://d1w82usnq70pt2.cloudfront.net/wp-content/uploads/2020/11/BlackLegionTerminator-750x606.png
 
--Word Bearers -  ~ 
+-Word Bearers - https://www.goonhammer.com/start-competing-word-bearers-tactics/ ~ https://d1w82usnq70pt2.cloudfront.net/wp-content/uploads/2020/11/WB_Possessed-750x563.png
 
--Salamanders -  ~ 
+-Salamanders - https://www.goonhammer.com/start-competing-salamanders-tactics/ ~ https://d1w82usnq70pt2.cloudfront.net/wp-content/uploads/2020/12/Salamanders_Eradicator-750x563.png
 
--Raven Guard -  ~ 
+-Raven Guard - https://www.goonhammer.com/start-competing-raven-guard-tactics/ ~ https://d1w82usnq70pt2.cloudfront.net/wp-content/uploads/2020/11/RavenGuard_Reiver-750x563.png
 
 -Alpha Legion - https://www.goonhammer.com/start-competing-alpha-legion-tactics/ ~ https://d1w82usnq70pt2.cloudfront.netwp-contentuploads202011Alpha_Legion-750x563.png
