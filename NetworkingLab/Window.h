@@ -45,7 +45,8 @@ private:
 	Fl_Box m_buttonBox;
 
 	Server* m_Server;
-	std::vector<Client*> m_clients;
+	Client* m_Client;
+
 	
 
 	Fl_Menu_Bar m_menuBar;

@@ -46,5 +46,6 @@ void Window::createServerOnClick(Fl_Widget* _widget, void* _userData)
 
 void Window::joinServerOnClick(Fl_Widget* _widget, void* _userData)
 {
-
+	Window* mainWindow = (Window*)_userData;
+	mainWindow->m_Client = new Client();
 }

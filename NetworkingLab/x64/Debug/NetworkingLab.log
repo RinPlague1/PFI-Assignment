@@ -1,2 +1,16 @@
-﻿  main.cpp
-  NetworkingLab.vcxproj -> C:\Users\omcca\Documents\GitHub\PFI-Assignment\x64\Debug\NetworkingLab.exe
+﻿  Client.cpp
+\\bournemouth.ac.uk\data\Student\Home\SciTech\s5611581\GitHub\PFI-Assignment\NetworkingLab\Client.cpp(22,9): warning C4101: 'm_m_clientSocket': unreferenced local variable
+  ClientSocket.cpp
+\\bournemouth.ac.uk\data\Student\Home\SciTech\s5611581\GitHub\PFI-Assignment\NetworkingLab\ClientSocket.cpp(41,64): warning C4267: 'argument': conversion from 'size_t' to 'int', possible loss of data
+  main.cpp
+  pugixml.cpp
+  Server.cpp
+  ServerSocket.cpp
+\\bournemouth.ac.uk\data\Student\Home\SciTech\s5611581\GitHub\PFI-Assignment\NetworkingLab\ServerSocket.cpp(31,44): warning C4267: 'argument': conversion from 'size_t' to 'int', possible loss of data
+  Timer.cpp
+  Window.cpp
+  Wsa.cpp
+  Generating Code...
+\\bournemouth.ac.uk\data\Student\Home\SciTech\s5611581\GitHub\PFI-Assignment\NetworkingLab\ClientSocket.cpp(46): warning C4715: 'ClientSocket::send': not all control paths return a value
+LINK : warning LNK4098: defaultlib 'MSVCRT' conflicts with use of other libs; use /NODEFAULTLIB:library
+  NetworkingLab.vcxproj -> \\bournemouth.ac.uk\data\Student\Home\SciTech\s5611581\GitHub\PFI-Assignment\x64\Debug\NetworkingLab.exe

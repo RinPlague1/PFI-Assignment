@@ -13,13 +13,13 @@ struct ClientSocket
 	~ClientSocket();
 	bool receive(std::string& _message);
 	int send(const std::string& _message);
-
+	SOCKET getSocket();
 	bool m_closed;
 
 private:
 	friend struct ServerSocket;
 
-	
+
 
 	SOCKET m_socket;
 

@@ -44,3 +44,8 @@ int ClientSocket::send(const std::string& _message)
 		throw std::runtime_error("Failed to send data");
 	}
 }
+
+SOCKET ClientSocket::getSocket()
+{
+	return m_socket;
+}
