@@ -19,7 +19,8 @@ Client::Client():
 		std::cout << "The status: " << wsaData.szSystemStatus << std::endl;
 	}
 
-	SOCKET m_m_clientSocket;
+	socketConnect = false;
+
 	m_clientSocket = INVALID_SOCKET;
 	m_clientSocket = socket(AF_INET, SOCK_STREAM, IPPROTO_TCP);
 
@@ -32,7 +33,7 @@ Client::Client():
 		std::cout << "Socket is OK!" << std::endl;
 	}
 
-	sockaddr_in ClientService;
+	
 	ClientService.sin_family = AF_INET;
 	ClientService.sin_addr.s_addr = inet_addr("127.0.0.1");
 	ClientService.sin_port = htons(8080);
@@ -45,9 +46,11 @@ Client::Client():
 	}
 	else 
 	{
+
 		std::cout << "Client: Connect is OK!" << std::endl;
 		std::cout << "Client: Can start sending and receiving data..." << std::endl;
-		
+		socketConnect = true;
+
 	}
 }
 
@@ -59,25 +62,52 @@ Client::~Client()
 
 void Client::on_tick()
 {
-	char buffer[200];
-	std::cout << "Enter the message: ";
-	std::cin.getline(buffer, 200);
-	int sbyteCount = send(m_clientSocket, buffer, 200, 0);
-	if (sbyteCount == SOCKET_ERROR) {
-		std::cout << "Client send error: " << WSAGetLastError() << std::endl;
+	if (socketConnect == true)
+	{
+
+		char buffer[200];
+		std::cout << "Enter the message: ";
+		std::cin.getline(buffer, 200);
+		int sbyteCount = send(m_clientSocket, buffer, 200, 0);
+		if (sbyteCount == SOCKET_ERROR) {
+			std::cout << "Client send error: " << WSAGetLastError() << std::endl;
+		}
+		else {
+			std::cout << "Client: Sent " << sbyteCount << " bytes" << std::endl;
+		}
+
+		// Receiving data from the server
+		char receiveBuffer[200];
+		int rbyteCount = recv(m_clientSocket, receiveBuffer, 200, 0);
+		if (rbyteCount < 0) {
+			std::cout << "Client recv error: " << WSAGetLastError() << std::endl;
+
+		}
+		else {
+			std::cout << "Client: Received data: " << receiveBuffer << std::endl;
+		}
 	}
-	else {
-		std::cout << "Client: Sent " << sbyteCount << " bytes" << std::endl;
+	else
+	{
+		ClientService.sin_family = AF_INET;
+		ClientService.sin_addr.s_addr = inet_addr("127.0.0.1");
+		ClientService.sin_port = htons(8080);
+
+		if (connect(m_clientSocket, reinterpret_cast<SOCKADDR*>(&ClientService), sizeof(ClientService)) == SOCKET_ERROR)
+		{
+			std::cout << "Client: connect - Failed to connect: " << WSAGetLastError() << std::endl;
+			WSACleanup();
+
+		}
+		else
+		{
+
+			std::cout << "Client: Connect is OK!" << std::endl;
+			std::cout << "Client: Can start sending and receiving data..." << std::endl;
+			socketConnect = true;
+
+		}
 	}
 
-	// Receiving data from the server
-	char receiveBuffer[200];
-	int rbyteCount = recv(m_clientSocket, receiveBuffer, 200, 0);
-	if (rbyteCount < 0) {
-		std::cout << "Client recv error: " << WSAGetLastError() << std::endl;
 
-	}
-	else {
-		std::cout << "Client: Received data: " << receiveBuffer << std::endl;
-	}
 }

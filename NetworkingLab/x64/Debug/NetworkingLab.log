@@ -1,16 +1,23 @@
-﻿  Client.cpp
-\\bournemouth.ac.uk\data\Student\Home\SciTech\s5611581\GitHub\PFI-Assignment\NetworkingLab\Client.cpp(22,9): warning C4101: 'm_m_clientSocket': unreferenced local variable
-  ClientSocket.cpp
-\\bournemouth.ac.uk\data\Student\Home\SciTech\s5611581\GitHub\PFI-Assignment\NetworkingLab\ClientSocket.cpp(41,64): warning C4267: 'argument': conversion from 'size_t' to 'int', possible loss of data
+﻿  Window.cpp
+D:\s5611581\PFI-Assignment\NetworkingLab\Window.cpp(13,17): warning C4129: 'I': unrecognized character escape sequence
+D:\s5611581\PFI-Assignment\NetworkingLab\Window.cpp(14,23): warning C4129: 'N': unrecognized character escape sequence
+D:\s5611581\PFI-Assignment\NetworkingLab\Window.cpp(15,19): warning C4129: 'I': unrecognized character escape sequence
+D:\s5611581\PFI-Assignment\NetworkingLab\Window.cpp(16,17): warning C4129: 'W': unrecognized character escape sequence
+D:\s5611581\PFI-Assignment\NetworkingLab\Window.cpp(17,18): warning C4129: 'W': unrecognized character escape sequence
+D:\s5611581\PFI-Assignment\NetworkingLab\Window.cpp(18,20): warning C4129: 'I': unrecognized character escape sequence
+D:\s5611581\PFI-Assignment\NetworkingLab\Window.cpp(19,17): warning C4129: 'N': unrecognized character escape sequence
+D:\s5611581\PFI-Assignment\NetworkingLab\Window.cpp(20,18): warning C4129: 'B': unrecognized character escape sequence
+D:\s5611581\PFI-Assignment\NetworkingLab\Window.cpp(21,16): warning C4129: 'i': unrecognized character escape sequence
+D:\s5611581\PFI-Assignment\NetworkingLab\Window.cpp(22,18): warning C4129: 'B': unrecognized character escape sequence
+D:\s5611581\PFI-Assignment\NetworkingLab\Window.cpp(23,19): warning C4129: 'P': unrecognized character escape sequence
+D:\s5611581\PFI-Assignment\NetworkingLab\Window.cpp(24,17): warning C4129: 'P': unrecognized character escape sequence
+D:\s5611581\PFI-Assignment\NetworkingLab\Window.cpp(25,19): warning C4129: 'S': unrecognized character escape sequence
+D:\s5611581\PFI-Assignment\NetworkingLab\Window.cpp(26,18): warning C4129: 'B': unrecognized character escape sequence
+D:\s5611581\PFI-Assignment\NetworkingLab\Window.cpp(27,18): warning C4129: 'W': unrecognized character escape sequence
+D:\s5611581\PFI-Assignment\NetworkingLab\Window.cpp(28,18): warning C4129: 'S': unrecognized character escape sequence
+D:\s5611581\PFI-Assignment\NetworkingLab\Window.cpp(29,17): warning C4129: 'R': unrecognized character escape sequence
+D:\s5611581\PFI-Assignment\NetworkingLab\Window.cpp(30,18): warning C4129: 'A': unrecognized character escape sequence
   main.cpp
-  pugixml.cpp
-  Server.cpp
-  ServerSocket.cpp
-\\bournemouth.ac.uk\data\Student\Home\SciTech\s5611581\GitHub\PFI-Assignment\NetworkingLab\ServerSocket.cpp(31,44): warning C4267: 'argument': conversion from 'size_t' to 'int', possible loss of data
-  Timer.cpp
-  Window.cpp
-  Wsa.cpp
   Generating Code...
-\\bournemouth.ac.uk\data\Student\Home\SciTech\s5611581\GitHub\PFI-Assignment\NetworkingLab\ClientSocket.cpp(46): warning C4715: 'ClientSocket::send': not all control paths return a value
 LINK : warning LNK4098: defaultlib 'MSVCRT' conflicts with use of other libs; use /NODEFAULTLIB:library
-  NetworkingLab.vcxproj -> \\bournemouth.ac.uk\data\Student\Home\SciTech\s5611581\GitHub\PFI-Assignment\x64\Debug\NetworkingLab.exe
+  NetworkingLab.vcxproj -> D:\s5611581\PFI-Assignment\x64\Debug\NetworkingLab.exe

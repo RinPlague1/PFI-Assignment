@@ -35,7 +35,7 @@ private:
 	windowState m_currentState;
 
 
-	Fl_Box m_img;
+	//Fl_Box m_img;
 
 	Fl_Button m_ServerButton;
 	Fl_Button m_ClientButton;
@@ -47,7 +47,27 @@ private:
 	Server* m_Server;
 	Client* m_Client;
 
-	
+	//images
+	Fl_PNG_Image m_darkAngels;
+	Fl_PNG_Image m_emperorsChildren;
+	Fl_PNG_Image m_ironWarriors;
+	Fl_PNG_Image m_whiteScars;
+	Fl_PNG_Image m_spaceWolves;
+	Fl_PNG_Image m_imperialFists;
+	Fl_PNG_Image m_nightLords;
+	Fl_PNG_Image m_bloodAngels;
+	Fl_PNG_Image m_ironHands;
+	Fl_PNG_Image m_worldEaters;
+	Fl_PNG_Image m_ultramarines;
+	Fl_PNG_Image m_deathGuard;
+	Fl_PNG_Image m_thousandSons;
+	Fl_PNG_Image m_blackLegion;
+	Fl_PNG_Image m_wordBearers;
+	Fl_PNG_Image m_salamanders;
+	Fl_PNG_Image m_ravenguard;
+	Fl_PNG_Image m_alphaLegion;
+
+
 
 	Fl_Menu_Bar m_menuBar;
 
@@ -57,6 +77,8 @@ public:
 
 	static void createServerOnClick(Fl_Widget* _widget, void* _userData);
 	static void joinServerOnClick(Fl_Widget* _widget, void* _userData);
+
+	void changeState(windowState _State);
 
 };
 

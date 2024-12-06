@@ -19,6 +19,8 @@
 class Client: Timer
 {
 	SOCKET m_clientSocket;
+	sockaddr_in ClientService;
+	bool socketConnect;
 
 public:
 	Client();

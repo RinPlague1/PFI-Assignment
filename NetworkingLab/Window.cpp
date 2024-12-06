@@ -2,15 +2,33 @@
 #include <stdexcept>
 
 Window::Window() :
-	Fl_Window(960, 640, "Hello")
+	Fl_Window(960, 640, "Legio Chat")
 	, m_currentState(menu)
-	, m_ServerButton(430, 440, 80, 20, "Host")
-	, m_ClientButton(530, 440, 80, 20, "Join")
+	, m_ServerButton(230, 240, 200, 200, "Host")
+	, m_ClientButton(530, 240, 200, 200, "Join")
 	, m_logoBox(0, 0, 215, 420)
 	, m_textBox(215, 0, 425, 420)
 	, m_buttonBox(0, 420, 640, 60)
 	, m_menuBar(0,0,640,30)
-	, m_img(100, 100, 100, 100, "Woah")
+	, m_darkAngels("images\Interrogator_Chaplain-750x563.png")
+	, m_emperorsChildren("images\Noise_Marine.png")
+	, m_ironWarriors("images\IronWarrior-750x563.png")
+	, m_whiteScars("images\WhiteScar_Inceptor-750x563.png")
+	, m_spaceWolves("images\Wulfen-750x563.png")
+	, m_imperialFists("images\Imperial_Fist-750x563.png")
+	, m_nightLords("images\NL_Raptor-750x669.png")
+	, m_bloodAngels("images\BloodAngel-750x563.png")
+	, m_ironHands("images\iron_Hands-750x643.png")
+	, m_worldEaters("images\Berserker-750x673.png")
+	, m_ultramarines("images\Primaris_LT_Ultra-750x508.png")
+	, m_deathGuard("images\PlagueMarine-750x566.png")
+	, m_thousandSons("images\Scarab_Occult_terminator-1024x850.png")
+	, m_blackLegion("images\BlackLegionTerminator-750x606.png")
+	, m_wordBearers("images\WB_Possessed-750x563.png")
+	, m_salamanders("images\Salamanders_Eradicator-750x563.png")
+	, m_ravenguard("images\RavenGuard_Reiver-750x563.png")
+	, m_alphaLegion("images\Alpha_Legion.png")
+	
 
 {
 	Fl::scheme("gtk+");
@@ -19,11 +37,7 @@ Window::Window() :
 	m_ClientButton.callback(joinServerOnClick, this);
 
 
-	m_img.box(FL_DOWN_BOX);
-	m_img.color(fl_rgb_color(123, 45, 234));
-
 	
-
 
 	
 }
@@ -48,4 +62,28 @@ void Window::joinServerOnClick(Fl_Widget* _widget, void* _userData)
 {
 	Window* mainWindow = (Window*)_userData;
 	mainWindow->m_Client = new Client();
+
+	mainWindow->m_currentState = join;
+}
+
+
+void Window::changeState(windowState _State)
+{
+	switch (_State)
+	{
+	case menu:
+
+		break;
+	case hosting:
+
+		break;
+	case join:
+
+		break;
+	case room:
+
+		break;
+	default:
+		break;
+	}
 }
