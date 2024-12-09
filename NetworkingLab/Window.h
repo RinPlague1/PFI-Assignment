@@ -67,6 +67,24 @@ private:
 	Fl_PNG_Image m_ravenguard;
 	Fl_PNG_Image m_alphaLegion;
 
+	//img boxes
+	Fl_Box m_DA;
+	/*Fl_Box m_EC;
+	Fl_Box m_IW;
+	Fl_Box m_WS;
+	Fl_Box m_SW;
+	Fl_Box m_IF;
+	Fl_Box m_NL;
+	Fl_Box m_BA;
+	Fl_Box m_IH;
+	Fl_Box m_UM;
+	Fl_Box m_DG;
+	Fl_Box m_TS;
+	Fl_Box m_BL;
+	Fl_Box m_WB;
+	Fl_Box m_S;
+	Fl_Box m_RG;
+	Fl_Box m_AL;*/
 
 
 	Fl_Menu_Bar m_menuBar;

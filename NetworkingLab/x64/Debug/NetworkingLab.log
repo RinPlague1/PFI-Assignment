@@ -1,23 +1,2 @@
 ﻿  Window.cpp
-D:\s5611581\PFI-Assignment\NetworkingLab\Window.cpp(13,17): warning C4129: 'I': unrecognized character escape sequence
-D:\s5611581\PFI-Assignment\NetworkingLab\Window.cpp(14,23): warning C4129: 'N': unrecognized character escape sequence
-D:\s5611581\PFI-Assignment\NetworkingLab\Window.cpp(15,19): warning C4129: 'I': unrecognized character escape sequence
-D:\s5611581\PFI-Assignment\NetworkingLab\Window.cpp(16,17): warning C4129: 'W': unrecognized character escape sequence
-D:\s5611581\PFI-Assignment\NetworkingLab\Window.cpp(17,18): warning C4129: 'W': unrecognized character escape sequence
-D:\s5611581\PFI-Assignment\NetworkingLab\Window.cpp(18,20): warning C4129: 'I': unrecognized character escape sequence
-D:\s5611581\PFI-Assignment\NetworkingLab\Window.cpp(19,17): warning C4129: 'N': unrecognized character escape sequence
-D:\s5611581\PFI-Assignment\NetworkingLab\Window.cpp(20,18): warning C4129: 'B': unrecognized character escape sequence
-D:\s5611581\PFI-Assignment\NetworkingLab\Window.cpp(21,16): warning C4129: 'i': unrecognized character escape sequence
-D:\s5611581\PFI-Assignment\NetworkingLab\Window.cpp(22,18): warning C4129: 'B': unrecognized character escape sequence
-D:\s5611581\PFI-Assignment\NetworkingLab\Window.cpp(23,19): warning C4129: 'P': unrecognized character escape sequence
-D:\s5611581\PFI-Assignment\NetworkingLab\Window.cpp(24,17): warning C4129: 'P': unrecognized character escape sequence
-D:\s5611581\PFI-Assignment\NetworkingLab\Window.cpp(25,19): warning C4129: 'S': unrecognized character escape sequence
-D:\s5611581\PFI-Assignment\NetworkingLab\Window.cpp(26,18): warning C4129: 'B': unrecognized character escape sequence
-D:\s5611581\PFI-Assignment\NetworkingLab\Window.cpp(27,18): warning C4129: 'W': unrecognized character escape sequence
-D:\s5611581\PFI-Assignment\NetworkingLab\Window.cpp(28,18): warning C4129: 'S': unrecognized character escape sequence
-D:\s5611581\PFI-Assignment\NetworkingLab\Window.cpp(29,17): warning C4129: 'R': unrecognized character escape sequence
-D:\s5611581\PFI-Assignment\NetworkingLab\Window.cpp(30,18): warning C4129: 'A': unrecognized character escape sequence
-  main.cpp
-  Generating Code...
-LINK : warning LNK4098: defaultlib 'MSVCRT' conflicts with use of other libs; use /NODEFAULTLIB:library
-  NetworkingLab.vcxproj -> D:\s5611581\PFI-Assignment\x64\Debug\NetworkingLab.exe
+  NetworkingLab.vcxproj -> C:\Users\omcca\Documents\GitHub\PFI-Assignment\x64\Debug\NetworkingLab.exe
