@@ -34,8 +34,8 @@ class Window :
 private:
 	windowState m_currentState;
 
-
-	//Fl_Box m_img;
+	Fl_PNG_Image m_terraBG;
+	Fl_Box m_terraBGBox;
 
 	Fl_Button m_ServerButton;
 	Fl_Button m_ClientButton;
@@ -48,6 +48,9 @@ private:
 	Client* m_Client;
 
 	//images
+
+
+
 	Fl_PNG_Image m_darkAngels;
 	Fl_PNG_Image m_emperorsChildren;
 	Fl_PNG_Image m_ironWarriors;
@@ -68,8 +71,10 @@ private:
 	Fl_PNG_Image m_alphaLegion;
 
 	//img boxes
+
+
 	Fl_Box m_DA;
-	/*Fl_Box m_EC;
+	Fl_Box m_EC;
 	Fl_Box m_IW;
 	Fl_Box m_WS;
 	Fl_Box m_SW;
@@ -77,6 +82,7 @@ private:
 	Fl_Box m_NL;
 	Fl_Box m_BA;
 	Fl_Box m_IH;
+	Fl_Box m_WE;
 	Fl_Box m_UM;
 	Fl_Box m_DG;
 	Fl_Box m_TS;
@@ -84,7 +90,7 @@ private:
 	Fl_Box m_WB;
 	Fl_Box m_S;
 	Fl_Box m_RG;
-	Fl_Box m_AL;*/
+	Fl_Box m_AL;
 
 
 	Fl_Menu_Bar m_menuBar;

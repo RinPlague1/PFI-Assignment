@@ -2,14 +2,18 @@
 #include <stdexcept>
 
 Window::Window() :
-	Fl_Window(1280, 720, "Legio Chat")
+	Fl_Window(1920, 1080, "Legio Chat")
 	, m_currentState(menu)
+	, m_terraBG("images/Imperial_Palace_Terra2(1).png")
+	, m_terraBGBox(0, 0, 1920, 1080)
 	, m_ServerButton(230, 240, 200, 200, "Host")
 	, m_ClientButton(530, 240, 200, 200, "Join")
 	, m_logoBox(0, 0, 215, 420)
 	, m_textBox(215, 0, 425, 420)
 	, m_buttonBox(0, 420, 640, 60)
 	, m_menuBar(0,0,640,30)
+	, m_Server(nullptr)
+	, m_Client(nullptr)
 	, m_darkAngels("images/Interrogator_Chaplain-750x563.png")
 	, m_emperorsChildren("images/Noise_Marine.png")
 	, m_ironWarriors("images/IronWarrior-750x563.png")
@@ -28,25 +32,97 @@ Window::Window() :
 	, m_salamanders("images/Salamanders_Eradicator-750x563.png")
 	, m_ravenguard("images/RavenGuard_Reiver-750x563.png")
 	, m_alphaLegion("imagesAlpha_Legion.png")
-	, m_DA(200, 200, 181, 141)
-
+	, m_DA(100, 100, 181, 141)
+	, m_EC(200, 200, 181, 141)
+	, m_IW(200, 200, 181, 141)
+	, m_WS(100, 251, 181, 141)
+	, m_SW(100, 402, 181, 141)
+	, m_IF(100, 553, 181, 141)
+	, m_NL(200, 200, 181, 141)
+	, m_BA(350, 100, 181, 141)
+	, m_IH(350, 251, 181, 141)
+	, m_WE(200, 200, 181, 141)
+	, m_UM(350, 402, 181, 141)
+	, m_DG(200, 200, 181, 141)
+	, m_TS(200, 200, 181, 141)
+	, m_BL(200, 200, 181, 141)
+	, m_WB(200, 200, 181, 141)
+	, m_S(350, 553, 181, 141)
+	, m_RG(350, 704, 181, 141)
+	, m_AL(200, 200, 181, 141)
 {
 	Fl::scheme("gtk+");
+
+	m_terraBGBox.box(FL_DOWN_BOX);
+	if (m_terraBG.fail())
+	{
+		throw std::runtime_error("terra Failed");
+	}
+
+	m_terraBGBox.image(m_terraBG);
 
 	m_DA.box(FL_DOWN_BOX);
 	if (m_darkAngels.fail())
 	{
 		throw std::runtime_error("Dark Angels Failed");
 	}
+	m_WS.box(FL_DOWN_BOX);
+	if (m_whiteScars.fail())
+	{
+		throw std::runtime_error("Dark Angels Failed");
+	}
+	m_SW.box(FL_DOWN_BOX);
+	if (m_spaceWolves.fail())
+	{
+		throw std::runtime_error("Dark Angels Failed");
+	}
+	m_IF.box(FL_DOWN_BOX);
+	if (m_imperialFists.fail())
+	{
+		throw std::runtime_error("Dark Angels Failed");
+	}
+	m_BA.box(FL_DOWN_BOX);
+	if (m_bloodAngels.fail())
+	{
+		throw std::runtime_error("Dark Angels Failed");
+	}
+	m_IH.box(FL_DOWN_BOX);
+	if (m_imperialFists.fail())
+	{
+		throw std::runtime_error("Dark Angels Failed");
+	}
+	m_UM.box(FL_DOWN_BOX);
+	if (m_ultramarines.fail())
+	{
+		throw std::runtime_error("Dark Angels Failed");
+	}
+	m_S.box(FL_DOWN_BOX);
+	if (m_salamanders.fail())
+	{
+		throw std::runtime_error("Dark Angels Failed");
+	}
+	m_RG.box(FL_DOWN_BOX);
+	if (m_ravenguard.fail())
+	{
+		throw std::runtime_error("Dark Angels Failed");
+	}
 
 	m_DA.image(m_darkAngels);
+	m_WS.image(m_whiteScars);
+	m_SW.image(m_spaceWolves);
+	m_IF.image(m_imperialFists);
+    m_BA.image(m_bloodAngels);
+    m_IH.image(m_ironHands);
+    m_UM.image(m_ultramarines);
+	m_S.image(m_salamanders);
+	m_RG.image(m_ravenguard);
 
 	m_ServerButton.callback(createServerOnClick, this);
 	m_ClientButton.callback(joinServerOnClick, this);
 
 
 	
-
+	this->changeState(m_currentState);
 	
 }
 
@@ -80,13 +156,47 @@ void Window::changeState(windowState _State)
 	switch (_State)
 	{
 	case menu:
-
+		m_DA.hide();
+		m_EC.hide();
+		m_IW.hide();
+		m_WS.hide();
+		m_SW.hide();
+		m_IF.hide();
+		m_NL.hide();
+		m_BA.hide();
+		m_IH.hide();
+		m_WE.hide();
+		m_UM.hide();
+		m_DG.hide();
+		m_TS.hide();
+		m_BL.hide();
+		m_WB.hide();
+		m_S.hide();
+		m_RG.hide();
+		m_AL.hide();
 		break;
 	case hosting:
 
 		break;
 	case join:
-
+		m_DA.show();
+		m_EC.show();
+		m_IW.show();
+		m_WS.show();
+		m_SW.show();
+		m_IF.show();
+		m_NL.show();
+		m_BA.show();
+		m_IH.show();
+		m_WE.show();
+		m_UM.show();
+		m_DG.show();
+		m_TS.show();
+		m_BL.show();
+		m_WB.show();
+		m_S.show();
+		m_RG.show();
+		m_AL.show();
 		break;
 	case room:
 

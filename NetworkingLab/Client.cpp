@@ -91,7 +91,7 @@ void Client::on_tick()
 	{
 		ClientService.sin_family = AF_INET;
 		ClientService.sin_addr.s_addr = inet_addr("127.0.0.1");
-		ClientService.sin_port = htons(8080);
+		ClientService.sin_port = htons(3243);
 
 		if (connect(m_clientSocket, reinterpret_cast<SOCKADDR*>(&ClientService), sizeof(ClientService)) == SOCKET_ERROR)
 		{
