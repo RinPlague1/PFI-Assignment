@@ -1,4 +1,3 @@
-﻿  ClientSocket.cpp
-D:\S5611581\project\PFI-Assignment\NetworkingLab\ClientSocket.cpp(56,64): warning C4267: 'argument': conversion from 'size_t' to 'int', possible loss of data
-D:\S5611581\project\PFI-Assignment\NetworkingLab\ClientSocket.cpp(61): warning C4715: 'ClientSocket::send': not all control paths return a value
+﻿  ServerSocket.cpp
+D:\S5611581\project\PFI-Assignment\NetworkingLab\ServerSocket.cpp(34,44): warning C4267: 'argument': conversion from 'size_t' to 'int', possible loss of data
   NetworkingLab.vcxproj -> D:\S5611581\project\PFI-Assignment\x64\Debug\NetworkingLab.exe

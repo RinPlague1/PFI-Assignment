@@ -1,3 +1,5 @@
+#define _WINSOCK_DEPRECATED_NO_WARNINGS
+
 #include "ServerSocket.h"
 
 #include <WS2tcpip.h>
@@ -8,6 +10,7 @@ ServerSocket::ServerSocket(int _port)
 	: m_socket(INVALID_SOCKET)//null socket
 {
 	//what we want the socket to use
+
 	addrinfo hints = { 0 };
 	hints.ai_family = AF_INET;
 	hints.ai_socktype = SOCK_STREAM;
@@ -40,6 +43,7 @@ ServerSocket::ServerSocket(int _port)
 	{
 		throw std::runtime_error("Failed to listen on socket");
 	}
+
 	u_long mode = 1;
 	if (ioctlsocket(m_socket, FIONBIO, &mode) == SOCKET_ERROR)
 	{
@@ -50,6 +54,7 @@ ServerSocket::ServerSocket(int _port)
 
 ServerSocket::~ServerSocket()
 {
+	std::cout << "closing server";
 	closesocket(m_socket);
 }
 
