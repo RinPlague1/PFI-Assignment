@@ -23,11 +23,10 @@ private:
 	friend struct ServerSocket;
 
 	SOCKET m_socket;
-	sockaddr_in ClientService;
+	
 	void nonBlocking();
 	ClientSocket(const ClientSocket& _copy);
 	ClientSocket& operator=(const ClientSocket& _assign);
-	bool socketConnect;
 };
 
 #endif // !CLIENT_SOCKET_H

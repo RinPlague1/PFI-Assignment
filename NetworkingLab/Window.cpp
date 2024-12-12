@@ -217,24 +217,14 @@ void Window::enteredIpAddress(Fl_Widget* _widget, void* _userData)
 {
 	Window* mainWindow = (Window*)_userData;
 	
+	std::string buffer;
+	buffer = mainWindow->m_ipInput.value();
+	bool validIp = mainWindow->m_Client->m_clientSocket.connectFunction(buffer);
+	if (validIp == false)
+	{
+		mainWindow->m_ipInput.value("");
+	}
 
-	try
-	{
-		std::string buffer;
-		buffer = mainWindow->m_ipInput.value();
-		bool validIp = mainWindow->m_Client->m_clientSocket.connectFunction(buffer);
-		if (validIp == false)
-		{
-			mainWindow->m_ipInput.value("");
-		}
-	}
-	catch (std::exception& _ex)
-	{
-		std::string connectMessage = _ex.what();
-		fl_alert(connectMessage.c_str());
-		
-		
-	}
 }
 
 

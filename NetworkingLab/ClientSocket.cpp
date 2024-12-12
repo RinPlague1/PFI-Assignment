@@ -8,7 +8,39 @@ ClientSocket::ClientSocket()
 	: m_socket(INVALID_SOCKET)
 	, m_closed(false)
 {
+	WSADATA wsaData;
+	int wserr;
+	WORD wVersionRequested = MAKEWORD(2, 2);
+	wserr = WSAStartup(wVersionRequested, &wsaData);
 
+	if (wserr != 0) {
+		std::cout << "The winsock dll not found" << std::endl;
+	}
+	else {
+		std::cout << "The Winsock dll found" << std::endl;
+		std::cout << "The status: " << wsaData.szSystemStatus << std::endl;
+	}
+
+	//socketConnect = false;
+
+	m_socket = INVALID_SOCKET;
+	m_socket = socket(AF_INET, SOCK_STREAM, IPPROTO_TCP);
+
+	// Check for socket creation success
+	if (m_socket == INVALID_SOCKET) {
+		std::cout << "Error at socket(): " << WSAGetLastError() << std::endl;
+		WSACleanup();
+	}
+	else {
+		std::cout << "client Socket is OK!" << std::endl;
+
+	}
+
+	/*u_long mode = 1;
+	if (ioctlsocket(m_clientSocket, FIONBIO, &mode) == SOCKET_ERROR)
+	{
+		throw std::runtime_error("Failed to set non-blocking");
+	}*/
 }
 
 ClientSocket::~ClientSocket()
@@ -67,7 +99,8 @@ SOCKET ClientSocket::getSocket()
 
 bool ClientSocket::connectFunction(std::string _ipInput)
 {
-
+	std::cout << _ipInput << " : ip entered" << std::endl;
+	sockaddr_in ClientService;
 	ClientService.sin_family = AF_INET;
 	ClientService.sin_addr.s_addr = inet_addr(_ipInput.c_str());
 	ClientService.sin_port = htons(8080);
@@ -84,9 +117,8 @@ bool ClientSocket::connectFunction(std::string _ipInput)
 		std::cout << "Client: Connect is OK!" << std::endl;
 		std::cout << "Client: Can start sending and receiving data..." << std::endl;
 
-		nonBlocking();
+		//nonBlocking();
 
-		socketConnect = true;
 		return true;
 
 	}
