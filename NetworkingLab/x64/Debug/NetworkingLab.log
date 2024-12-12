@@ -1,2 +1,4 @@
-﻿  Client.cpp
-  NetworkingLab.vcxproj -> C:\Users\omcca\Documents\GitHub\PFI-Assignment\x64\Debug\NetworkingLab.exe
+﻿  ClientSocket.cpp
+D:\S5611581\project\PFI-Assignment\NetworkingLab\ClientSocket.cpp(56,64): warning C4267: 'argument': conversion from 'size_t' to 'int', possible loss of data
+D:\S5611581\project\PFI-Assignment\NetworkingLab\ClientSocket.cpp(61): warning C4715: 'ClientSocket::send': not all control paths return a value
+  NetworkingLab.vcxproj -> D:\S5611581\project\PFI-Assignment\x64\Debug\NetworkingLab.exe

@@ -11,6 +11,7 @@
 #include <Fl/Fl_Box.H>
 #include <Fl/Fl_PNG_Image.H>
 #include <Fl/Fl_Menu_Bar.H>
+#include <Fl/Fl_Input.H>
 
 #include <vector>
 
@@ -48,9 +49,6 @@ private:
 	Client* m_Client;
 
 	//images
-
-
-
 	Fl_PNG_Image m_darkAngels;
 	Fl_PNG_Image m_emperorsChildren;
 	Fl_PNG_Image m_ironWarriors;
@@ -71,8 +69,6 @@ private:
 	Fl_PNG_Image m_alphaLegion;
 
 	//img boxes
-
-
 	Fl_Box m_DA;
 	Fl_Box m_EC;
 	Fl_Box m_IW;
@@ -92,8 +88,8 @@ private:
 	Fl_Box m_RG;
 	Fl_Box m_AL;
 
+	Fl_Input m_ipInput;
 
-	Fl_Menu_Bar m_menuBar;
 
 public:
 	Window();
@@ -101,6 +97,8 @@ public:
 
 	static void createServerOnClick(Fl_Widget* _widget, void* _userData);
 	static void joinServerOnClick(Fl_Widget* _widget, void* _userData);
+
+	static void enteredIpAddress(Fl_Widget* _widget, void* _userData);
 
 	void changeState(windowState _State);
 

@@ -4,6 +4,7 @@
 
 #include <winsock2.h>
 #include <iostream>
+#include <FL/fl_ask.H>
 
 struct ServerSocket;
 
@@ -15,16 +16,18 @@ struct ClientSocket
 	int send(const std::string& _message);
 	SOCKET getSocket();
 	bool m_closed;
+	bool connectFunction(std::string _ipInput);
+
 
 private:
 	friend struct ServerSocket;
 
-
-
 	SOCKET m_socket;
-
+	sockaddr_in ClientService;
+	void nonBlocking();
 	ClientSocket(const ClientSocket& _copy);
 	ClientSocket& operator=(const ClientSocket& _assign);
+	bool socketConnect;
 };
 
 #endif // !CLIENT_SOCKET_H

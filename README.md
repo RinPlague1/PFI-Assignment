@@ -3,6 +3,10 @@
 ## References
 
 ### images
+
+- terraBG - https://warhammer40k.fandom.com/wiki/Terra?file=Imperial_Palace_Terra2.jpg ~ https://static.wikia.nocookie.net/warhammer40k/images/b/b5/Imperial_Palace_Terra2.jpg/revision/latest/scale-to-width-down/1000?cb=20130227172909
+
+
 -Dark Angels - https://www.goonhammer.com/start-competing-dark-angels-tactics-9e/ ~ https://d1w82usnq70pt2.cloudfront.net/wp-content/uploads/2021/01/Interrogator_Chaplain.png
 
 -Emperor's Children - https://www.goonhammer.com/start-competing-emperors-children-tactics/ ~ https://d1w82usnq70pt2.cloudfront.net/wp-content/uploads/2020/11/Noise_Marine-676x750.png

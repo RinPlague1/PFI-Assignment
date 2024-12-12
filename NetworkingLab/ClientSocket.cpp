@@ -1,3 +1,5 @@
+#define _WINSOCK_DEPRECATED_NO_WARNINGS
+
 #include "ClientSocket.h"
 #include "ServerSocket.h"
 #include <iostream>
@@ -5,7 +7,9 @@
 ClientSocket::ClientSocket()
 	: m_socket(INVALID_SOCKET)
 	, m_closed(false)
-{ }
+{
+
+}
 
 ClientSocket::~ClientSocket()
 {
@@ -14,6 +18,17 @@ ClientSocket::~ClientSocket()
 		closesocket(m_socket);
 	}
 }
+
+
+void ClientSocket::nonBlocking()
+{
+	u_long mode = 1;
+	if (ioctlsocket(m_socket, FIONBIO, &mode) == SOCKET_ERROR)
+	{
+		throw std::runtime_error("Failed to set non-blocking");
+	}
+}
+
 
 bool ClientSocket::receive(std::string& _message)
 {
@@ -48,4 +63,34 @@ int ClientSocket::send(const std::string& _message)
 SOCKET ClientSocket::getSocket()
 {
 	return m_socket;
+}
+
+bool ClientSocket::connectFunction(std::string _ipInput)
+{
+
+	ClientService.sin_family = AF_INET;
+	ClientService.sin_addr.s_addr = inet_addr(_ipInput.c_str());
+	ClientService.sin_port = htons(8080);
+
+	if (connect(m_socket, reinterpret_cast<SOCKADDR*>(&ClientService), sizeof(ClientService)) == SOCKET_ERROR)
+	{
+		std::cout << "Client: connect - Failed to connect: " << WSAGetLastError() << std::endl;
+		fl_alert("Invalid IP");
+		return false;
+	}
+	else
+	{
+
+		std::cout << "Client: Connect is OK!" << std::endl;
+		std::cout << "Client: Can start sending and receiving data..." << std::endl;
+
+		nonBlocking();
+
+		socketConnect = true;
+		return true;
+
+	}
+
+
+
 }
