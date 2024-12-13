@@ -12,6 +12,7 @@
 #include <Fl/Fl_PNG_Image.H>
 #include <Fl/Fl_Menu_Bar.H>
 #include <Fl/Fl_Input.H>
+#include <FL/Fl_Text_Display.H>
 
 #include <vector>
 
@@ -42,7 +43,8 @@ private:
 	Fl_Button m_ClientButton;
 
 	Fl_Box m_logoBox;
-	Fl_Box m_textBox;
+	Fl_Text_Display m_IpDisplayBox;
+	Fl_Text_Buffer m_IpTextBuffer;
 	Fl_Box m_buttonBox;
 
 	Server* m_Server;

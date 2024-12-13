@@ -2,14 +2,15 @@
 #include <stdexcept>
 
 Window::Window() :
-	Fl_Window(1920, 1080, "Legio Chat")
+	Fl_Window(1920, 1080, "Legion Chat")
 	, m_currentState(menu)
 	, m_terraBG("images/Imperial_Palace_Terra2(1).png")
 	, m_terraBGBox(0, 0, 1920, 1080)
 	, m_ServerButton(230, 240, 200, 200, "Host")
 	, m_ClientButton(530, 240, 200, 200, "Join")
 	, m_logoBox(0, 0, 215, 420)
-	, m_textBox(215, 0, 425, 420)
+	, m_IpDisplayBox(885, 250, 150, 25)
+	, m_IpTextBuffer()
 	, m_buttonBox(0, 420, 640, 60)
 	, m_Server(nullptr)
 	, m_Client(nullptr)
@@ -111,47 +112,47 @@ Window::Window() :
 	m_EC.box(FL_DOWN_BOX);
 	if (m_emperorsChildren.fail())
 	{
-		throw std::runtime_error("Dark Angels Failed");
+		throw std::runtime_error("emperors children Failed");
 	}
 	m_IW.box(FL_DOWN_BOX);
 	if (m_ironWarriors.fail())
 	{
-		throw std::runtime_error("Dark Angels Failed");
+		throw std::runtime_error("Iron Warriors Failed");
 	}
 	m_NL.box(FL_DOWN_BOX);
 	if (m_nightLords.fail())
 	{
-		throw std::runtime_error("Dark Angels Failed");
+		throw std::runtime_error("Night Lords Failed");
 	}
 	m_WE.box(FL_DOWN_BOX);
 	if (m_worldEaters.fail())
 	{
-		throw std::runtime_error("Dark Angels Failed");
+		throw std::runtime_error("World Eaters Failed");
 	}
 	m_DG.box(FL_DOWN_BOX);
 	if (m_deathGuard.fail())
 	{
-		throw std::runtime_error("Dark Angels Failed");
+		throw std::runtime_error("Death Guard Failed");
 	}
 	m_TS.box(FL_DOWN_BOX);
 	if (m_thousandSons.fail())
 	{
-		throw std::runtime_error("Dark Angels Failed");
+		throw std::runtime_error("Thousand Sons Failed");
 	}
 	m_BL.box(FL_DOWN_BOX);
 	if (m_blackLegion.fail())
 	{
-		throw std::runtime_error("Dark Angels Failed");
+		throw std::runtime_error("Black Legion Failed");
 	}
 	m_WB.box(FL_DOWN_BOX);
 	if (m_wordBearers.fail())
 	{
-		throw std::runtime_error("Dark Angels Failed");
+		throw std::runtime_error("Word Bearers Failed");
 	}
 	m_AL.box(FL_DOWN_BOX);
 	if (m_alphaLegion.fail())
 	{
-		throw std::runtime_error("Dark Angels Failed");
+		throw std::runtime_error("Alpha Legion Failed");
 	}
 
 	m_DA.image(m_darkAngels);
@@ -175,7 +176,9 @@ Window::Window() :
 	m_AL.image(m_alphaLegion);
 
 
-
+	m_IpTextBuffer.text("IP address: 127.0.0.1");
+	m_IpDisplayBox.buffer(m_IpTextBuffer);
+	
 	m_ServerButton.callback(createServerOnClick, this);
 	m_ClientButton.callback(joinServerOnClick, this);
 
@@ -200,7 +203,7 @@ void Window::createServerOnClick(Fl_Widget* _widget, void* _userData)
 	std::cout << "server created";
 
 	mainWindow->m_currentState = hosting;
-
+	mainWindow->changeState(mainWindow->m_currentState);
 }
 
 void Window::joinServerOnClick(Fl_Widget* _widget, void* _userData)
@@ -255,9 +258,14 @@ void Window::changeState(windowState _State)
 		m_ipInput.hide();
 
 		break;
+	
 	case hosting:
+		m_ServerButton.hide();
+		m_ClientButton.hide();
+
 
 		break;
+	
 	case join:
 		m_DA.show();
 		m_EC.show();
