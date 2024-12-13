@@ -90,6 +90,7 @@ int ClientSocket::send(const std::string& _message)
 	{
 		throw std::runtime_error("Failed to send data");
 	}
+	return bytes;
 }
 
 SOCKET ClientSocket::getSocket()
@@ -109,6 +110,7 @@ bool ClientSocket::connectFunction(std::string _ipInput)
 	{
 		std::cout << "Client: connect - Failed to connect: " << WSAGetLastError() << std::endl;
 		fl_alert("Invalid IP");
+		m_connected = false;
 		return false;
 	}
 	else
@@ -117,8 +119,8 @@ bool ClientSocket::connectFunction(std::string _ipInput)
 		std::cout << "Client: Connect is OK!" << std::endl;
 		std::cout << "Client: Can start sending and receiving data..." << std::endl;
 
-		//nonBlocking();
-
+		nonBlocking();
+		m_connected = true;
 		return true;
 
 	}

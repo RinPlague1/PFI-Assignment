@@ -162,9 +162,6 @@
     <ClInclude Include="Window.h" />
     <ClInclude Include="Wsa.h" />
   </ItemGroup>
-  <ItemGroup>
-    <Xml Include="Angron.xml" />
-  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>

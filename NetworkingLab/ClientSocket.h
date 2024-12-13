@@ -7,6 +7,7 @@
 #include <FL/fl_ask.H>
 
 struct ServerSocket;
+class Client;
 
 struct ClientSocket
 {
@@ -21,15 +22,14 @@ struct ClientSocket
 
 private:
 	friend struct ServerSocket;
-
+	friend class Client;
 	SOCKET m_socket;
 	
+	bool m_connected;
 	void nonBlocking();
 	ClientSocket(const ClientSocket& _copy);
 	ClientSocket& operator=(const ClientSocket& _assign);
 };
 
 #endif // !CLIENT_SOCKET_H
-
-
 

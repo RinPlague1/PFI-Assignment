@@ -27,8 +27,10 @@ class Client: Timer
 	ClientSocket m_clientSocket;
 	bool socketConnect;
 
+	Window* window;
+
 public:
-	Client();
+	Client(Window* _windowPtr);
 	~Client();
 	void on_tick();
 	

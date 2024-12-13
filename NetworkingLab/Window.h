@@ -47,8 +47,13 @@ private:
 	Fl_Text_Buffer m_IpTextBuffer;
 	Fl_Box m_buttonBox;
 
+	Fl_Text_Display m_chatLog;
+	Fl_Text_Buffer m_chatBuffer;
+
+	Fl_Input m_message;
+
 	Server* m_Server;
-	Client* m_Client;
+	std::shared_ptr<Client> m_Client;
 
 	//images
 	Fl_PNG_Image m_darkAngels;
@@ -98,9 +103,13 @@ public:
 	~Window();
 
 	static void createServerOnClick(Fl_Widget* _widget, void* _userData);
-	static void joinServerOnClick(Fl_Widget* _widget, void* _userData);
+	void createClient();
+
+	static void StaticCreateClient(Fl_Widget* _widget, void* _userData);
+	void addToLog(std::string _buffer);
 
 	static void enteredIpAddress(Fl_Widget* _widget, void* _userData);
+	static void sendMessage(Fl_Widget* _widget, void* _userData);
 
 	void changeState(windowState _State);
 

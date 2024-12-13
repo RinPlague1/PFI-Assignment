@@ -12,6 +12,9 @@ Window::Window() :
 	, m_IpDisplayBox(885, 250, 150, 25)
 	, m_IpTextBuffer()
 	, m_buttonBox(0, 420, 640, 60)
+	, m_chatLog(725, 100, 434, 650)
+	, m_chatBuffer()
+	, m_message(725, 750, 434, 100)
 	, m_Server(nullptr)
 	, m_Client(nullptr)
 	, m_darkAngels("images/Interrogator_Chaplain-750x563.png")
@@ -180,11 +183,13 @@ Window::Window() :
 	m_IpDisplayBox.buffer(m_IpTextBuffer);
 	
 	m_ServerButton.callback(createServerOnClick, this);
-	m_ClientButton.callback(joinServerOnClick, this);
+	m_ClientButton.callback(StaticCreateClient, this);
 
 	m_ipInput.callback(enteredIpAddress, this);
 	m_ipInput.when(FL_WHEN_ENTER_KEY);
 
+	m_message.callback(sendMessage, this);
+	m_message.when(FL_WHEN_ENTER_KEY);
 	
 	this->changeState(m_currentState);
 	
@@ -206,15 +211,27 @@ void Window::createServerOnClick(Fl_Widget* _widget, void* _userData)
 	mainWindow->changeState(mainWindow->m_currentState);
 }
 
-void Window::joinServerOnClick(Fl_Widget* _widget, void* _userData)
+void Window::StaticCreateClient(Fl_Widget* _widget, void* _userData)
 {
 	Window* mainWindow = (Window*)_userData;
-	mainWindow->m_Client = new Client();
+	mainWindow->createClient();
 
-	mainWindow->m_currentState = join;
-	mainWindow->changeState(mainWindow->m_currentState);
+	
 }
 
+void Window::createClient()
+{
+	m_Client = std::make_shared<Client>(this);
+	m_currentState = join;
+	changeState(m_currentState);
+}
+
+void Window::addToLog(std::string _buffer)
+{
+	m_chatBuffer.append(_buffer.c_str());
+	m_chatBuffer.append("\n");
+	m_chatLog.buffer(m_chatBuffer);
+}
 
 void Window::enteredIpAddress(Fl_Widget* _widget, void* _userData)
 {
@@ -227,9 +244,23 @@ void Window::enteredIpAddress(Fl_Widget* _widget, void* _userData)
 	{
 		mainWindow->m_ipInput.value("");
 	}
+	else
+	{
+		mainWindow->m_currentState = room;
+		mainWindow->changeState(mainWindow->m_currentState);
+	}
 
 }
 
+void Window::sendMessage(Fl_Widget* _widget, void* _userData)
+{
+	Window* mainWindow = (Window*)_userData;
+
+	std::string msgBuffer;
+	msgBuffer = mainWindow->m_ipInput.value();
+	mainWindow->m_Client->m_clientSocket.send(msgBuffer);
+	
+}
 
 void Window::changeState(windowState _State)
 {
@@ -256,6 +287,10 @@ void Window::changeState(windowState _State)
 		m_AL.hide();
 
 		m_ipInput.hide();
+
+		m_IpDisplayBox.hide();
+		m_chatLog.hide();
+		m_message.hide();
 
 		break;
 	
@@ -293,6 +328,29 @@ void Window::changeState(windowState _State)
 
 		break;
 	case room:
+		m_DA.hide();
+		m_EC.hide();
+		m_IW.hide();
+		m_WS.hide();
+		m_SW.hide();
+		m_IF.hide();
+		m_NL.hide();
+		m_BA.hide();
+		m_IH.hide();
+		m_WE.hide();
+		m_UM.hide();
+		m_DG.hide();
+		m_TS.hide();
+		m_BL.hide();
+		m_WB.hide();
+		m_S.hide();
+		m_RG.hide();
+		m_AL.hide();
+
+		m_ipInput.hide();
+
+		m_chatLog.show();
+		m_message.show();
 
 		break;
 	default:
