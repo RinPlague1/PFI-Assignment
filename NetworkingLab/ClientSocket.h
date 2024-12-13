@@ -4,8 +4,10 @@
 
 #include <winsock2.h>
 #include <iostream>
+#include <FL/fl_ask.H>
 
 struct ServerSocket;
+class Client;
 
 struct ClientSocket
 {
@@ -15,19 +17,19 @@ struct ClientSocket
 	int send(const std::string& _message);
 	SOCKET getSocket();
 	bool m_closed;
+	bool connectFunction(std::string _ipInput);
+
 
 private:
 	friend struct ServerSocket;
-
-
-
+	friend class Client;
 	SOCKET m_socket;
-
+	
+	bool m_connected;
+	void nonBlocking();
 	ClientSocket(const ClientSocket& _copy);
 	ClientSocket& operator=(const ClientSocket& _assign);
 };
 
 #endif // !CLIENT_SOCKET_H
-
-
 

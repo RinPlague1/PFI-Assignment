@@ -11,6 +11,8 @@
 #include <Fl/Fl_Box.H>
 #include <Fl/Fl_PNG_Image.H>
 #include <Fl/Fl_Menu_Bar.H>
+#include <Fl/Fl_Input.H>
+#include <FL/Fl_Text_Display.H>
 
 #include <vector>
 
@@ -41,16 +43,19 @@ private:
 	Fl_Button m_ClientButton;
 
 	Fl_Box m_logoBox;
-	Fl_Box m_textBox;
+	Fl_Text_Display m_IpDisplayBox;
+	Fl_Text_Buffer m_IpTextBuffer;
 	Fl_Box m_buttonBox;
 
+	Fl_Text_Display m_chatLog;
+	Fl_Text_Buffer m_chatBuffer;
+
+	Fl_Input m_message;
+
 	Server* m_Server;
-	Client* m_Client;
+	std::shared_ptr<Client> m_Client;
 
 	//images
-
-
-
 	Fl_PNG_Image m_darkAngels;
 	Fl_PNG_Image m_emperorsChildren;
 	Fl_PNG_Image m_ironWarriors;
@@ -71,8 +76,6 @@ private:
 	Fl_PNG_Image m_alphaLegion;
 
 	//img boxes
-
-
 	Fl_Box m_DA;
 	Fl_Box m_EC;
 	Fl_Box m_IW;
@@ -92,15 +95,21 @@ private:
 	Fl_Box m_RG;
 	Fl_Box m_AL;
 
+	Fl_Input m_ipInput;
 
-	Fl_Menu_Bar m_menuBar;
 
 public:
 	Window();
 	~Window();
 
 	static void createServerOnClick(Fl_Widget* _widget, void* _userData);
-	static void joinServerOnClick(Fl_Widget* _widget, void* _userData);
+	void createClient();
+
+	static void StaticCreateClient(Fl_Widget* _widget, void* _userData);
+	void addToLog(std::string _buffer);
+
+	static void enteredIpAddress(Fl_Widget* _widget, void* _userData);
+	static void sendMessage(Fl_Widget* _widget, void* _userData);
 
 	void changeState(windowState _State);
 
