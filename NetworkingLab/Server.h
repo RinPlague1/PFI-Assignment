@@ -20,6 +20,7 @@ public:
 	~Server();
 	void on_tick();
 	void bounceToClients(std::string _message, size_t _ci);
+	void sendServerVer(std::shared_ptr<ClientSocket> _client);
 };
 
 #endif

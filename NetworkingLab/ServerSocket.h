@@ -18,6 +18,7 @@ private:
 
 	ServerSocket(const ServerSocket& _copy);
 	ServerSocket& operator = (const ServerSocket& _assign);
+
 };
 
 

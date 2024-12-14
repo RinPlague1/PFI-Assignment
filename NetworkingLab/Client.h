@@ -6,6 +6,7 @@
 #include<FL/fl_ask.H>
 
 #include "Wsa.h"
+#include "Window.h"
 #include <iostream>
 #include <stdexcept>
 
@@ -27,7 +28,7 @@ class Client: Timer
 	ClientSocket m_clientSocket;
 	bool socketConnect;
 
-	Window* window;
+	Window* m_window;
 
 public:
 	Client(Window* _windowPtr);

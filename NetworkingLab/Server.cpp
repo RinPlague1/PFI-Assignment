@@ -21,11 +21,12 @@ void Server::on_tick()
 	printf("Server listening on port 8080\n");*/
 
 	
-	std::cout << "tick";
+	//std::cout << "tick";
 	std::shared_ptr<ClientSocket> client = server.accept();
 	if (client)
 	{
 		printf("Client Connected!\n");
+		sendServerVer(client);
 		clients.push_back(client);
 	}
 
@@ -49,6 +50,14 @@ void Server::on_tick()
 			--ci;
 		}
 	}
+}
+
+void Server::sendServerVer(std::shared_ptr<ClientSocket> _client)
+{
+	
+	
+	
+	_client->send("Server Version: V8.601.1");
 }
 
 void Server::bounceToClients(std::string _message, size_t _ci)

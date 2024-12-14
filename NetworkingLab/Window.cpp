@@ -246,6 +246,7 @@ void Window::enteredIpAddress(Fl_Widget* _widget, void* _userData)
 	}
 	else
 	{
+		mainWindow->m_ipInput.value("");
 		mainWindow->m_currentState = room;
 		mainWindow->changeState(mainWindow->m_currentState);
 	}
@@ -257,7 +258,8 @@ void Window::sendMessage(Fl_Widget* _widget, void* _userData)
 	Window* mainWindow = (Window*)_userData;
 
 	std::string msgBuffer;
-	msgBuffer = mainWindow->m_ipInput.value();
+	msgBuffer = mainWindow->m_message.value();
+	std::cout << "message buffer: " << msgBuffer << std::endl;
 	mainWindow->m_Client->m_clientSocket.send(msgBuffer);
 	
 }
