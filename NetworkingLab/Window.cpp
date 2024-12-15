@@ -53,9 +53,14 @@ Window::Window() :
 	, m_S(350, 553, 181, 141)
 	, m_RG(350, 704, 181, 141)
 	, m_AL(1609 ,553, 181, 141)
-	, m_ipInput(885,200,150,50,"IP Address: ")
+	, m_usernameInput(885, 200, 150, 50, "Username: ")
+	, m_ipInput(885,400,150,50,"IP Address: ")
+	, m_incomingMessage("","","")
+	, msgCount(0)
+	
 {
 	Fl::scheme("gtk+");
+	
 
 	m_terraBGBox.box(FL_DOWN_BOX);
 	if (m_terraBG.fail())
@@ -191,6 +196,9 @@ Window::Window() :
 	m_message.callback(sendMessage, this);
 	m_message.when(FL_WHEN_ENTER_KEY);
 	
+	m_usernameInput.callback(usernameInput, this);
+	m_usernameInput.when(FL_WHEN_ENTER_KEY);
+
 	this->changeState(m_currentState);
 	
 }
@@ -228,15 +236,56 @@ void Window::createClient()
 
 void Window::addToLog(std::string _buffer)
 {
-	m_chatBuffer.append(_buffer.c_str());
-	m_chatBuffer.append("\n");
-	m_chatLog.buffer(m_chatBuffer);
+	if (msgCount > 0)
+	{
+		interperateMessage(_buffer);
+
+		std::cout << m_incomingMessage.getLegion() << std::endl;
+		setColour();
+
+		m_chatBuffer.append(m_incomingMessage.getUsername().c_str());
+		m_chatBuffer.append(": ");
+		m_chatLog.buffer(m_chatBuffer);
+
+		//fl_color(0, 0, 0);
+		m_chatBuffer.append(m_incomingMessage.getMessage().c_str());
+		m_chatLog.buffer(m_chatBuffer);
+
+		m_chatBuffer.append("\n");
+		m_chatLog.buffer(m_chatBuffer);
+	} 
+	else 
+	{
+		m_chatBuffer.append(_buffer.c_str());
+		m_chatLog.buffer(m_chatBuffer);
+		m_chatBuffer.append("\n");
+		msgCount += 1;
+	}
+	
 }
+
 
 void Window::enteredIpAddress(Fl_Widget* _widget, void* _userData)
 {
 	Window* mainWindow = (Window*)_userData;
 	
+	if (mainWindow->m_Client->m_clientSocket.getUsername() == "§")
+	{
+		Window* mainWindow = (Window*)_userData;
+
+		std::string usernameBuffer;
+		usernameBuffer = mainWindow->m_usernameInput.value();
+		std::cout << "username: " << usernameBuffer << std::endl;
+
+		mainWindow->m_Client->m_clientSocket.setUsername(usernameBuffer);
+		mainWindow->m_usernameInput.value("");
+
+		if (mainWindow->m_Client->m_clientSocket.getUsername() == "")
+		{
+			mainWindow->m_Client->m_clientSocket.setUsername("Anonymous Client");
+		}
+	}
+
 	std::string buffer;
 	buffer = mainWindow->m_ipInput.value();
 	bool validIp = mainWindow->m_Client->m_clientSocket.connectFunction(buffer);
@@ -259,10 +308,184 @@ void Window::sendMessage(Fl_Widget* _widget, void* _userData)
 
 	std::string msgBuffer;
 	msgBuffer = mainWindow->m_message.value();
-	std::cout << "message buffer: " << msgBuffer << std::endl;
-	mainWindow->m_Client->m_clientSocket.send(msgBuffer);
+
+	Message* newMessage = new Message(mainWindow->m_Client->m_clientSocket.getUsername(), mainWindow->m_Client->m_clientSocket.getLegion(), msgBuffer);
+	std::string messageSend = newMessage->xmlToString();
+
+	std::cout << "message sending: " << newMessage << std::endl;
+	mainWindow->m_Client->m_clientSocket.send(messageSend);
+	mainWindow->m_message.value("");
 	
 }
+
+void Window::usernameInput(Fl_Widget* _widget, void* _userData)
+{
+	Window* mainWindow = (Window*)_userData;
+
+	std::string usernameBuffer;
+	usernameBuffer = mainWindow->m_usernameInput.value();
+	std::cout << "username: " << usernameBuffer << std::endl;
+
+	mainWindow->m_Client->m_clientSocket.setUsername(usernameBuffer);
+	mainWindow->m_usernameInput.value("");
+
+
+}
+
+void Window::interperateMessage(std::string _message)
+{
+	std::string nullKey("§");
+	std::size_t usernameSection = _message.find(nullKey);
+	std::size_t legionSection = _message.find(nullKey, usernameSection + 1);
+
+	std::cout << "whole message: " << _message << std::endl;
+
+	std::string usernameData;
+
+	for (int i = 0; i < usernameSection; i++)
+	{
+		usernameData = usernameData + _message[i];
+	}
+	std::cout << "UserData: " << usernameData << std::endl;
+
+
+	std::string legionData;
+
+	for (int i = usernameSection + 1; i < legionSection; i++)
+	{
+		legionData = legionData + _message[i];
+	}
+	std::cout << "LegionData: " << legionData << std::endl;
+
+
+	std::string messageData;
+
+	for (int i = legionSection + 1; i < _message.length(); i++)
+	{
+		messageData = messageData + _message[i];
+	}
+	std::cout << "MessageData: " << messageData << std::endl;
+
+	m_incomingMessage.rewriteMessage(usernameData, legionData, messageData);
+
+
+}
+
+//void Window::setColour()
+//{
+//	std::string colourId;
+//	colourId = colourId + m_incomingMessage.getLegion();
+//
+//	if (colourId == "1")
+//	{
+//		fl_color(244, 175, 205);
+//		
+//	}
+//
+//	if (colourId == "2")
+//	{
+//		std::vector<int> emperorsChildren = { 244, 175, 205 };
+//		
+//	}
+//
+//	if (colourId == "3")
+//	{
+//		std::vector<int> ironWarriors = { 131, 133, 142 };
+//		
+//	}
+//
+//	if (colourId == "4")
+//	{
+//		std::vector<int> whiteScars = { 40, 159, 161 };
+//		
+//	}
+//
+//	if (colourId == "5")
+//	{
+//		std::vector<int> spaceWolves = { 113, 155, 183 };
+//		
+//	}
+//
+//	if (colourId == "6")
+//	{
+//		std::vector<int> imperialFists = { 255, 242, 0 };
+//		
+//	}
+//
+//	if (colourId == "7")
+//	{
+//		std::vector<int> nightLords = { 37, 40, 80 };
+//		
+//	}
+//
+//	if (colourId == "8")
+//	{
+//		std::vector<int> bloodAngels = { 154, 17, 21 };
+//		
+//	}
+//
+//	if (colourId == "9")
+//	{
+//		std::vector<int> ironHands = { 0, 64, 31 };
+//		
+//	}
+//
+//	if (colourId == "10")
+//	{
+//		std::vector<int> darkAngels = { 0, 64, 31 };
+//		
+//	}
+//
+//	if (colourId == "11")
+//	{
+//		std::vector<int> darkAngels = { 0, 64, 31 };
+//		
+//	}
+//
+//	if (colourId == "12")
+//	{
+//		std::vector<int> darkAngels = { 0, 64, 31 };
+//		
+//	}
+//
+//	if (colourId == "13")
+//	{
+//		std::vector<int> darkAngels = { 0, 64, 31 };
+//		
+//	}
+//
+//	if (colourId == "14")
+//	{
+//		std::vector<int> darkAngels = { 0, 64, 31 };
+//		
+//	}
+//
+//	if (colourId == "15")
+//	{
+//		std::vector<int> darkAngels = { 0, 64, 31 };
+//		
+//	}
+//
+//	if (colourId == "16")
+//	{
+//		std::vector<int> darkAngels = { 0, 64, 31 };
+//		
+//	}
+//
+//	if (colourId == "17")
+//	{
+//		std::vector<int> darkAngels = { 0, 64, 31 };
+//		
+//	}
+//
+//	if (colourId == "18")
+//	{
+//		std::vector<int> darkAngels = { 0, 64, 31 };
+//		
+//	}
+//
+//
+//}
 
 void Window::changeState(windowState _State)
 {
@@ -289,6 +512,7 @@ void Window::changeState(windowState _State)
 		m_AL.hide();
 
 		m_ipInput.hide();
+		m_usernameInput.hide();
 
 		m_IpDisplayBox.hide();
 		m_chatLog.hide();
@@ -300,6 +524,7 @@ void Window::changeState(windowState _State)
 		m_ServerButton.hide();
 		m_ClientButton.hide();
 
+		m_IpDisplayBox.show();
 
 		break;
 	
@@ -324,6 +549,7 @@ void Window::changeState(windowState _State)
 		m_AL.show();
 
 		m_ipInput.show();
+		m_usernameInput.show();
 
 		m_ServerButton.hide();
 		m_ClientButton.hide();
@@ -350,6 +576,7 @@ void Window::changeState(windowState _State)
 		m_AL.hide();
 
 		m_ipInput.hide();
+		m_usernameInput.hide();
 
 		m_chatLog.show();
 		m_message.show();

@@ -18,6 +18,7 @@
 
 #include "Server.h"
 #include "Client.h"
+#include "Message.h"
 
 enum windowState
 {
@@ -28,12 +29,14 @@ enum windowState
 	
 };
 
-
+struct Message;
 
 class Window :
     public Fl_Window
 {
 private:
+	friend struct Message;
+
 	windowState m_currentState;
 
 	Fl_PNG_Image m_terraBG;
@@ -95,8 +98,14 @@ private:
 	Fl_Box m_RG;
 	Fl_Box m_AL;
 
+	Fl_Input m_usernameInput;
+	
+
 	Fl_Input m_ipInput;
 
+	Message m_incomingMessage;
+	int msgCount;
+	
 
 public:
 	Window();
@@ -106,10 +115,19 @@ public:
 	void createClient();
 
 	static void StaticCreateClient(Fl_Widget* _widget, void* _userData);
+	
+	void interperateMessage(std::string _message);
+	/*void setColour();*/
+	
 	void addToLog(std::string _buffer);
 
 	static void enteredIpAddress(Fl_Widget* _widget, void* _userData);
 	static void sendMessage(Fl_Widget* _widget, void* _userData);
+
+	static void usernameInput(Fl_Widget* _widget, void* _userData);
+	
+	
+
 
 	void changeState(windowState _State);
 

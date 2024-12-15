@@ -14,6 +14,7 @@
 #include <winsock2.h>
 
 #include "Timer.h"
+#include "Message.h"
 
 //https://medium.com/@tharunappu2004/creating-a-simple-tcp-server-in-c-using-winsock-b75dde86dd39
 
@@ -29,11 +30,13 @@ class Client: Timer
 	bool socketConnect;
 
 	Window* m_window;
+	
 
 public:
 	Client(Window* _windowPtr);
 	~Client();
 	void on_tick();
+	
 	
 
 };

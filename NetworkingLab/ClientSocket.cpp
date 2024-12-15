@@ -7,6 +7,10 @@
 ClientSocket::ClientSocket()
 	: m_socket(INVALID_SOCKET)
 	, m_closed(false)
+	, m_username("§")
+	, m_legion("§")
+	, m_connected(false)
+
 {
 	WSADATA wsaData;
 	int wserr;
@@ -85,6 +89,10 @@ bool ClientSocket::receive(std::string& _message)
 
 int ClientSocket::send(const std::string& _message)
 {
+
+	/*Message* newMessage = new Message(m_username, m_legion, _message);
+	newMessage->xmlToString();*/
+
 	int bytes = ::send(m_socket, _message.c_str(), _message.length(), 0);
 	if (bytes <= 0)
 	{
@@ -125,6 +133,19 @@ bool ClientSocket::connectFunction(std::string _ipInput)
 
 	}
 
+}
 
+void ClientSocket::setUsername(std::string _username)
+{
+	m_username = _username;
+}
 
+std::string ClientSocket::getUsername()
+{
+	return m_username;
+}
+
+std::string ClientSocket::getLegion()
+{
+	return "1";
 }

@@ -5,6 +5,7 @@
 #include <WinSock2.h>
 #include "ClientSocket.h"
 #include <iostream>
+#include "Message.h"
 
 struct ServerSocket
 {
