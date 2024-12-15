@@ -29,6 +29,8 @@ enum windowState
 	
 };
 
+
+
 struct Message;
 
 class Window :
@@ -52,6 +54,7 @@ private:
 
 	Fl_Text_Display m_chatLog;
 	Fl_Text_Buffer m_chatBuffer;
+	Fl_Text_Buffer m_chatStyleBuffer;
 
 	Fl_Input m_message;
 
@@ -105,7 +108,7 @@ private:
 
 	Message m_incomingMessage;
 	int msgCount;
-	
+
 
 public:
 	Window();
@@ -117,7 +120,7 @@ public:
 	static void StaticCreateClient(Fl_Widget* _widget, void* _userData);
 	
 	void interperateMessage(std::string _message);
-	/*void setColour();*/
+	void setColour();
 	
 	void addToLog(std::string _buffer);
 

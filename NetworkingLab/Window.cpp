@@ -1,6 +1,28 @@
 #include "Window.h"
 #include <stdexcept>
 
+Fl_Text_Display::Style_Table_Entry styleTable[19] = {
+	{fl_rgb_color(0, 0, 0)},
+	{fl_rgb_color(0, 64, 31)},
+	{fl_rgb_color(244, 175, 205)},
+	{fl_rgb_color(131, 133, 142)},
+	{fl_rgb_color(140, 159, 161)},
+	{fl_rgb_color(113, 155, 183)},
+	{fl_rgb_color(255, 242, 0)},
+	{fl_rgb_color(37, 40, 80)},
+	{fl_rgb_color(154, 17, 21)},
+	{fl_rgb_color(168, 176, 178)},
+	{fl_rgb_color(106, 0, 1)},
+	{fl_rgb_color(13, 64, 127)},
+	{fl_rgb_color(132, 198, 102)},
+	{fl_rgb_color(24, 171, 204)},
+	{fl_rgb_color(35, 31, 32)},
+	{fl_rgb_color(90, 26, 42)},
+	{fl_rgb_color(82, 178, 68)},
+	{fl_rgb_color(36, 36, 36)},
+	{fl_rgb_color(0, 169, 156)}
+};
+
 Window::Window() :
 	Fl_Window(1920, 1080, "Legion Chat")
 	, m_currentState(menu)
@@ -14,6 +36,7 @@ Window::Window() :
 	, m_buttonBox(0, 420, 640, 60)
 	, m_chatLog(725, 100, 434, 650)
 	, m_chatBuffer()
+	, m_chatStyleBuffer()
 	, m_message(725, 750, 434, 100)
 	, m_Server(nullptr)
 	, m_Client(nullptr)
@@ -199,6 +222,7 @@ Window::Window() :
 	m_usernameInput.callback(usernameInput, this);
 	m_usernameInput.when(FL_WHEN_ENTER_KEY);
 
+
 	this->changeState(m_currentState);
 	
 }
@@ -241,24 +265,43 @@ void Window::addToLog(std::string _buffer)
 		interperateMessage(_buffer);
 
 		std::cout << m_incomingMessage.getLegion() << std::endl;
-		setColour();
+		
+
 
 		m_chatBuffer.append(m_incomingMessage.getUsername().c_str());
 		m_chatBuffer.append(": ");
 		m_chatLog.buffer(m_chatBuffer);
 
+
+		m_chatLog.highlight_data(&m_chatStyleBuffer, styleTable, 19, 'B', nullptr, nullptr);
+
 		//fl_color(0, 0, 0);
 		m_chatBuffer.append(m_incomingMessage.getMessage().c_str());
 		m_chatLog.buffer(m_chatBuffer);
+		setColour();
+
+		for (int i = 0; i < m_incomingMessage.getMessage().length(); i++)
+		{
+			m_chatStyleBuffer.append("A");
+		}
 
 		m_chatBuffer.append("\n");
+		m_chatStyleBuffer.append("\n");
 		m_chatLog.buffer(m_chatBuffer);
+
+		
 	} 
 	else 
 	{
+		for (int i = 0; i < _buffer.length(); i++)
+		{
+			m_chatStyleBuffer.append("A");
+		}
+
 		m_chatBuffer.append(_buffer.c_str());
 		m_chatLog.buffer(m_chatBuffer);
 		m_chatBuffer.append("\n");
+		m_chatStyleBuffer.append("\n");
 		msgCount += 1;
 	}
 	
@@ -371,121 +414,231 @@ void Window::interperateMessage(std::string _message)
 
 }
 
-//void Window::setColour()
-//{
-//	std::string colourId;
-//	colourId = colourId + m_incomingMessage.getLegion();
-//
-//	if (colourId == "1")
-//	{
-//		fl_color(244, 175, 205);
-//		
-//	}
-//
-//	if (colourId == "2")
-//	{
-//		std::vector<int> emperorsChildren = { 244, 175, 205 };
-//		
-//	}
-//
-//	if (colourId == "3")
-//	{
-//		std::vector<int> ironWarriors = { 131, 133, 142 };
-//		
-//	}
-//
-//	if (colourId == "4")
-//	{
-//		std::vector<int> whiteScars = { 40, 159, 161 };
-//		
-//	}
-//
-//	if (colourId == "5")
-//	{
-//		std::vector<int> spaceWolves = { 113, 155, 183 };
-//		
-//	}
-//
-//	if (colourId == "6")
-//	{
-//		std::vector<int> imperialFists = { 255, 242, 0 };
-//		
-//	}
-//
-//	if (colourId == "7")
-//	{
-//		std::vector<int> nightLords = { 37, 40, 80 };
-//		
-//	}
-//
-//	if (colourId == "8")
-//	{
-//		std::vector<int> bloodAngels = { 154, 17, 21 };
-//		
-//	}
-//
-//	if (colourId == "9")
-//	{
-//		std::vector<int> ironHands = { 0, 64, 31 };
-//		
-//	}
-//
-//	if (colourId == "10")
-//	{
-//		std::vector<int> darkAngels = { 0, 64, 31 };
-//		
-//	}
-//
-//	if (colourId == "11")
-//	{
-//		std::vector<int> darkAngels = { 0, 64, 31 };
-//		
-//	}
-//
-//	if (colourId == "12")
-//	{
-//		std::vector<int> darkAngels = { 0, 64, 31 };
-//		
-//	}
-//
-//	if (colourId == "13")
-//	{
-//		std::vector<int> darkAngels = { 0, 64, 31 };
-//		
-//	}
-//
-//	if (colourId == "14")
-//	{
-//		std::vector<int> darkAngels = { 0, 64, 31 };
-//		
-//	}
-//
-//	if (colourId == "15")
-//	{
-//		std::vector<int> darkAngels = { 0, 64, 31 };
-//		
-//	}
-//
-//	if (colourId == "16")
-//	{
-//		std::vector<int> darkAngels = { 0, 64, 31 };
-//		
-//	}
-//
-//	if (colourId == "17")
-//	{
-//		std::vector<int> darkAngels = { 0, 64, 31 };
-//		
-//	}
-//
-//	if (colourId == "18")
-//	{
-//		std::vector<int> darkAngels = { 0, 64, 31 };
-//		
-//	}
-//
-//
-//}
+void Window::setColour()
+{
+	std::string colourId;
+	colourId = colourId + m_incomingMessage.getLegion();
+	int usernameLength = 0;
+
+	if (colourId == "1")
+	{	
+
+		for (int i = 0; i < m_incomingMessage.getUsername().length() + 1; i++)
+		{
+			m_chatStyleBuffer.append("B");
+		}
+
+		std::cout << "style buffer: " << m_chatStyleBuffer.text() << std::endl;
+		m_chatLog.redraw();
+
+	}
+
+	if (colourId == "2")
+	{
+		for (int i = 0; i < m_incomingMessage.getUsername().length() + 1; i++)
+		{
+			m_chatStyleBuffer.append("C");
+		}
+
+		std::cout << "style buffer: " << m_chatStyleBuffer.text() << std::endl;
+		m_chatLog.redraw();
+		
+	}
+
+	if (colourId == "3")
+	{
+		for (int i = 0; i < m_incomingMessage.getUsername().length() + 1; i++)
+		{
+			m_chatStyleBuffer.append("D");
+		}
+
+		std::cout << "style buffer: " << m_chatStyleBuffer.text() << std::endl;
+		m_chatLog.redraw();
+		
+	}
+
+	if (colourId == "4")
+	{
+		for (int i = 0; i < m_incomingMessage.getUsername().length() + 1; i++)
+		{
+			m_chatStyleBuffer.append("E");
+		}
+
+		std::cout << "style buffer: " << m_chatStyleBuffer.text() << std::endl;
+		m_chatLog.redraw();
+		
+	}
+
+	if (colourId == "5")
+	{
+		for (int i = 0; i < m_incomingMessage.getUsername().length() + 1; i++)
+		{
+			m_chatStyleBuffer.append("F");
+		}
+
+		std::cout << "style buffer: " << m_chatStyleBuffer.text() << std::endl;
+		m_chatLog.redraw();
+		
+	}
+
+	if (colourId == "6")
+	{
+		for (int i = 0; i < m_incomingMessage.getUsername().length() + 1; i++)
+		{
+			m_chatStyleBuffer.append("G");
+		}
+
+		std::cout << "style buffer: " << m_chatStyleBuffer.text() << std::endl;
+		m_chatLog.redraw();
+		
+	}
+
+	if (colourId == "7")
+	{
+		for (int i = 0; i < m_incomingMessage.getUsername().length() + 1; i++)
+		{
+			m_chatStyleBuffer.append("H");
+		}
+
+		std::cout << "style buffer: " << m_chatStyleBuffer.text() << std::endl;
+		m_chatLog.redraw();
+		
+	}
+
+	if (colourId == "8")
+	{
+		for (int i = 0; i < m_incomingMessage.getUsername().length() + 1; i++)
+		{
+			m_chatStyleBuffer.append("I");
+		}
+
+		std::cout << "style buffer: " << m_chatStyleBuffer.text() << std::endl;
+		m_chatLog.redraw();
+		
+	}
+
+	if (colourId == "9")
+	{
+		for (int i = 0; i < m_incomingMessage.getUsername().length() + 1; i++)
+		{
+			m_chatStyleBuffer.append("J");
+		}
+
+		std::cout << "style buffer: " << m_chatStyleBuffer.text() << std::endl;
+		m_chatLog.redraw();
+		
+	}
+
+	if (colourId == "10")
+	{
+		for (int i = 0; i < m_incomingMessage.getUsername().length() + 1; i++)
+		{
+			m_chatStyleBuffer.append("K");
+		}
+
+		std::cout << "style buffer: " << m_chatStyleBuffer.text() << std::endl;
+		m_chatLog.redraw();
+		
+	}
+
+	if (colourId == "11")
+	{
+		for (int i = 0; i < m_incomingMessage.getUsername().length() + 1; i++)
+		{
+			m_chatStyleBuffer.append("L");
+		}
+
+		std::cout << "style buffer: " << m_chatStyleBuffer.text() << std::endl;
+		m_chatLog.redraw();
+		
+	}
+
+	if (colourId == "12")
+	{
+		for (int i = 0; i < m_incomingMessage.getUsername().length() + 1; i++)
+		{
+			m_chatStyleBuffer.append("M");
+		}
+
+		std::cout << "style buffer: " << m_chatStyleBuffer.text() << std::endl;
+		m_chatLog.redraw();
+		
+	}
+
+	if (colourId == "13")
+	{
+		for (int i = 0; i < m_incomingMessage.getUsername().length() + 1; i++)
+		{
+			m_chatStyleBuffer.append("N");
+		}
+
+		std::cout << "style buffer: " << m_chatStyleBuffer.text() << std::endl;
+		m_chatLog.redraw();
+		
+	}
+
+	if (colourId == "14")
+	{
+		for (int i = 0; i < m_incomingMessage.getUsername().length() + 1; i++)
+		{
+			m_chatStyleBuffer.append("O");
+		}
+
+		std::cout << "style buffer: " << m_chatStyleBuffer.text() << std::endl;
+		m_chatLog.redraw();
+		
+	}
+
+	if (colourId == "15")
+	{
+		for (int i = 0; i < m_incomingMessage.getUsername().length() + 1; i++)
+		{
+			m_chatStyleBuffer.append("P");
+		}
+
+		std::cout << "style buffer: " << m_chatStyleBuffer.text() << std::endl;
+		m_chatLog.redraw();
+		
+	}
+
+	if (colourId == "16")
+	{
+		for (int i = 0; i < m_incomingMessage.getUsername().length() + 1; i++)
+		{
+			m_chatStyleBuffer.append("Q");
+		}
+
+		std::cout << "style buffer: " << m_chatStyleBuffer.text() << std::endl;
+		m_chatLog.redraw();
+		
+	}
+
+	if (colourId == "17")
+	{
+		for (int i = 0; i < m_incomingMessage.getUsername().length() + 1; i++)
+		{
+			m_chatStyleBuffer.append("R");
+		}
+
+		std::cout << "style buffer: " << m_chatStyleBuffer.text() << std::endl;
+		m_chatLog.redraw();
+		
+	}
+
+	if (colourId == "18")
+	{
+		for (int i = 0; i < m_incomingMessage.getUsername().length() + 1; i++)
+		{
+			m_chatStyleBuffer.append("S");
+		}
+
+		std::cout << "style buffer: " << m_chatStyleBuffer.text() << std::endl;
+		m_chatLog.redraw();
+		
+	}
+
+
+}
 
 void Window::changeState(windowState _State)
 {
