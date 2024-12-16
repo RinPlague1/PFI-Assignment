@@ -22,7 +22,7 @@ void Server::on_tick()
 	printf("Server listening on port 8080\n");*/
 
 	
-	//std::cout << "tick";
+	std::cout << "tick";
 	std::shared_ptr<ClientSocket> client = server.accept();
 	if (client)
 	{

@@ -20,6 +20,7 @@ Client::~Client()
 
 void Client::on_tick()
 {
+	std::cout << "tick";
 	if (m_clientSocket.m_connected == true)
 	{
 		//std::cout << "ahhhh";

@@ -68,7 +68,7 @@ void ClientSocket::nonBlocking()
 
 bool ClientSocket::receive(std::string& _message)
 {
-	char buffer[256] = { 0 };
+	char buffer[512] = { 0 };
 	int bytes = ::recv(m_socket, buffer, sizeof(buffer) - 1, 0);
 	if (bytes == SOCKET_ERROR)
 	{
@@ -145,7 +145,13 @@ std::string ClientSocket::getUsername()
 	return m_username;
 }
 
+void ClientSocket::setLegion(std::string _legion)
+{
+	m_legion = _legion;
+}
+
+
 std::string ClientSocket::getLegion()
 {
-	return "1";
+	return m_legion;
 }

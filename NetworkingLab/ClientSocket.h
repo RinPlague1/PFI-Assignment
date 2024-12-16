@@ -22,6 +22,7 @@ struct ClientSocket
 	bool connectFunction(std::string _ipInput);
 
 	void setUsername(std::string _username);
+	void setLegion(std::string _legion);
 
 	std::string getUsername();
 	std::string getLegion();

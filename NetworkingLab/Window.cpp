@@ -26,10 +26,29 @@ Fl_Text_Display::Style_Table_Entry styleTable[19] = {
 Window::Window() :
 	Fl_Window(1920, 1080, "Legion Chat")
 	, m_currentState(menu)
+	, m_menuBar(0,0,1920,50)
 	, m_terraBG("images/Imperial_Palace_Terra2(1).png")
 	, m_terraBGBox(0, 0, 1920, 1080)
 	, m_ServerButton(230, 240, 200, 200, "Host")
 	, m_ClientButton(530, 240, 200, 200, "Join")
+	, m_pickDA(291, 153, 50, 35, "<-Pick")
+	, m_pickEC(1299, 153, 50, 35, "Pick->")
+	, m_pickIW(1299, 304, 50, 35, "Pick->")
+	, m_pickWS(291, 304, 50, 35, "<-Pick")
+	, m_pickSW(291, 455, 50, 35, "<-Pick")
+	, m_pickIF(291, 606, 50, 35, "<-Pick")
+	, m_pickNL(1299, 455, 50, 35, "Pick->")
+	, m_pickBA(541, 153, 50, 35, "<-Pick")
+	, m_pickIH(541, 304, 50, 35, "<-Pick")
+	, m_pickWE(1299, 606, 50, 35, "Pick->")
+	, m_pickUM(541, 455, 50, 35, "<-Pick")
+	, m_pickDG(1299, 757, 50, 35, "Pick->")
+	, m_pickTS(1549, 153, 50, 35, "Pick->")
+	, m_pickBL(1549, 304, 50, 35, "Pick->")
+	, m_pickWB(1549, 455, 50, 35, "Pick->")
+	, m_pickS(541, 606, 50, 35, "<-Pick")
+	, m_pickRG(541, 757, 50, 35, "<-Pick")
+	, m_pickAL(1549, 606, 50, 35, "Pick->")
 	, m_logoBox(0, 0, 215, 420)
 	, m_IpDisplayBox(885, 250, 150, 25)
 	, m_IpTextBuffer()
@@ -58,6 +77,7 @@ Window::Window() :
 	, m_salamanders("images/Salamanders_Eradicator-750x563.png")
 	, m_ravenguard("images/RavenGuard_Reiver-750x563.png")
 	, m_alphaLegion("images/Alpha_Legion.png")
+	/*, m_windowIcon("images/titusSelfie.png")*/
 	, m_DA(100, 100, 181, 141)
 	, m_EC(1359, 100, 181, 141)
 	, m_IW(1359, 251, 181, 141)
@@ -84,6 +104,7 @@ Window::Window() :
 {
 	Fl::scheme("gtk+");
 	
+	m_menuBar.add("&File/Return To Menu", "^o", returnToMenu, this);
 
 	m_terraBGBox.box(FL_DOWN_BOX);
 	if (m_terraBG.fail())
@@ -210,8 +231,28 @@ Window::Window() :
 	m_IpTextBuffer.text("IP address: 127.0.0.1");
 	m_IpDisplayBox.buffer(m_IpTextBuffer);
 	
-	m_ServerButton.callback(createServerOnClick, this);
+	m_ServerButton.callback(staticCreateServer, this);
 	m_ClientButton.callback(StaticCreateClient, this);
+
+	 m_pickDA.callback(legionDA, this);
+	 m_pickEC.callback(legionEC, this);
+	 m_pickIW.callback(legionIW, this);
+	 m_pickWS.callback(legionWS, this);
+	 m_pickSW.callback(legionSW, this);
+	 m_pickIF.callback(legionIF, this);
+	 m_pickNL.callback(legionNL, this);
+	 m_pickBA.callback(legionBA, this);
+	 m_pickIH.callback(legionIH, this);
+	 m_pickWE.callback(legionWE, this);
+	 m_pickUM.callback(legionUM, this);
+	 m_pickDG.callback(legionDG, this);
+	 m_pickTS.callback(legionTS, this);
+	 m_pickBL.callback(legionBL, this);
+	 m_pickWB.callback(legionWB, this);
+	 m_pickS.callback(legionS, this);
+	 m_pickRG.callback(legionRG, this);
+	 m_pickAL.callback(legionAL, this);
+
 
 	m_ipInput.callback(enteredIpAddress, this);
 	m_ipInput.when(FL_WHEN_ENTER_KEY);
@@ -233,14 +274,19 @@ Window::~Window()
 }
 
 
-void Window::createServerOnClick(Fl_Widget* _widget, void* _userData)
+void Window::staticCreateServer(Fl_Widget* _widget, void* _userData)
 {
 	Window* mainWindow = (Window*)_userData;
-	mainWindow->m_Server = new Server();
+	mainWindow->createServer();
+}
+
+void Window::createServer()
+{
+	m_Server = new Server();
 	std::cout << "server created";
 
-	mainWindow->m_currentState = hosting;
-	mainWindow->changeState(mainWindow->m_currentState);
+	m_currentState = hosting;
+	changeState(m_currentState);
 }
 
 void Window::StaticCreateClient(Fl_Widget* _widget, void* _userData)
@@ -271,22 +317,27 @@ void Window::addToLog(std::string _buffer)
 		m_chatBuffer.append(m_incomingMessage.getUsername().c_str());
 		m_chatBuffer.append(": ");
 		m_chatLog.buffer(m_chatBuffer);
+		
 
+		m_chatLog.highlight_data(&m_chatStyleBuffer, styleTable, 19, 'A', nullptr, nullptr);
 
-		m_chatLog.highlight_data(&m_chatStyleBuffer, styleTable, 19, 'B', nullptr, nullptr);
+		setColour();
 
 		//fl_color(0, 0, 0);
 		m_chatBuffer.append(m_incomingMessage.getMessage().c_str());
 		m_chatLog.buffer(m_chatBuffer);
-		setColour();
+		
 
-		for (int i = 0; i < m_incomingMessage.getMessage().length(); i++)
+		for (int i = 0; i < m_incomingMessage.getMessage().length() + 1; i++)
 		{
 			m_chatStyleBuffer.append("A");
 		}
 
 		m_chatBuffer.append("\n");
 		m_chatStyleBuffer.append("\n");
+
+		
+
 		m_chatLog.buffer(m_chatBuffer);
 
 		
@@ -640,11 +691,125 @@ void Window::setColour()
 
 }
 
+void Window::legionDA(Fl_Widget* _widget, void* _userData)
+{
+	Window* mainWindow = (Window*)_userData;
+	mainWindow->m_Client->m_clientSocket.setLegion("1");
+}
+void Window::legionEC(Fl_Widget* _widget, void* _userData)
+{
+	Window* mainWindow = (Window*)_userData;
+	mainWindow->m_Client->m_clientSocket.setLegion("2");
+}
+void Window::legionIW(Fl_Widget* _widget, void* _userData)
+{
+	Window* mainWindow = (Window*)_userData;
+	mainWindow->m_Client->m_clientSocket.setLegion("3");
+}
+void Window::legionWS(Fl_Widget* _widget, void* _userData)
+{
+	Window* mainWindow = (Window*)_userData;
+	mainWindow->m_Client->m_clientSocket.setLegion("4");
+}
+void Window::legionSW(Fl_Widget* _widget, void* _userData)
+{
+	Window* mainWindow = (Window*)_userData;
+	mainWindow->m_Client->m_clientSocket.setLegion("5");
+}
+void Window::legionIF(Fl_Widget* _widget, void* _userData)
+{
+	Window* mainWindow = (Window*)_userData;
+	mainWindow->m_Client->m_clientSocket.setLegion("6");
+}
+void Window::legionNL(Fl_Widget* _widget, void* _userData)
+{
+	Window* mainWindow = (Window*)_userData;
+	mainWindow->m_Client->m_clientSocket.setLegion("7");
+}
+void Window::legionBA(Fl_Widget* _widget, void* _userData)
+{
+	Window* mainWindow = (Window*)_userData;
+	mainWindow->m_Client->m_clientSocket.setLegion("8");
+}
+void Window::legionIH(Fl_Widget* _widget, void* _userData)
+{
+	Window* mainWindow = (Window*)_userData;
+	mainWindow->m_Client->m_clientSocket.setLegion("9");
+}
+void Window::legionWE(Fl_Widget* _widget, void* _userData)
+{
+	Window* mainWindow = (Window*)_userData;
+	mainWindow->m_Client->m_clientSocket.setLegion("10");
+}
+void Window::legionUM(Fl_Widget* _widget, void* _userData)
+{
+	Window* mainWindow = (Window*)_userData;
+	mainWindow->m_Client->m_clientSocket.setLegion("11");
+}
+void Window::legionDG(Fl_Widget* _widget, void* _userData)
+{
+	Window* mainWindow = (Window*)_userData;
+	mainWindow->m_Client->m_clientSocket.setLegion("12");
+}
+void Window::legionTS(Fl_Widget* _widget, void* _userData)
+{
+	Window* mainWindow = (Window*)_userData;
+	mainWindow->m_Client->m_clientSocket.setLegion("13");
+}
+void Window::legionBL(Fl_Widget* _widget, void* _userData)
+{
+	Window* mainWindow = (Window*)_userData;
+	mainWindow->m_Client->m_clientSocket.setLegion("14");
+}
+void Window::legionWB(Fl_Widget* _widget, void* _userData)
+{
+	Window* mainWindow = (Window*)_userData;
+	mainWindow->m_Client->m_clientSocket.setLegion("15");
+}
+void Window::legionS(Fl_Widget* _widget, void* _userData)
+{
+	Window* mainWindow = (Window*)_userData;
+	mainWindow->m_Client->m_clientSocket.setLegion("16");
+}
+void Window::legionRG(Fl_Widget* _widget, void* _userData)
+{
+	Window* mainWindow = (Window*)_userData;
+	mainWindow->m_Client->m_clientSocket.setLegion("17");
+}
+void Window::legionAL(Fl_Widget* _widget, void* _userData)
+{
+	Window* mainWindow = (Window*)_userData;
+	mainWindow->m_Client->m_clientSocket.setLegion("18");
+}
+
+void Window::returnToMenu(Fl_Widget* _widget, void* _userData)
+{
+	Window* mainWindow = (Window*)_userData;
+	if (mainWindow->m_Server != nullptr)
+	{
+		mainWindow->m_Server->~Server();
+	}
+	mainWindow->m_Server = nullptr;
+
+	if (mainWindow->m_Client != nullptr)
+	{
+		mainWindow->m_Client->~Client();
+	}
+	
+	mainWindow->m_Client = nullptr;
+	
+
+	mainWindow->changeState(menu);
+}
+
 void Window::changeState(windowState _State)
 {
 	switch (_State)
 	{
 	case menu:
+		m_ServerButton.show();
+		m_ClientButton.show();
+
 		m_DA.hide();
 		m_EC.hide();
 		m_IW.hide();
@@ -663,6 +828,25 @@ void Window::changeState(windowState _State)
 		m_S.hide();
 		m_RG.hide();
 		m_AL.hide();
+
+		m_pickDA.hide();
+		m_pickEC.hide();
+		m_pickIW.hide();
+		m_pickWS.hide();
+		m_pickSW.hide();
+		m_pickIF.hide();
+		m_pickNL.hide();
+		m_pickBA.hide();
+		m_pickIH.hide();
+		m_pickWE.hide();
+		m_pickUM.hide();
+		m_pickDG.hide();
+		m_pickTS.hide();
+		m_pickBL.hide();
+		m_pickWB.hide();
+		m_pickS.hide();
+		m_pickRG.hide();
+		m_pickAL.hide();
 
 		m_ipInput.hide();
 		m_usernameInput.hide();
@@ -701,6 +885,25 @@ void Window::changeState(windowState _State)
 		m_RG.show();
 		m_AL.show();
 
+		m_pickDA.show();
+		m_pickEC.show();
+		m_pickIW.show();
+		m_pickWS.show();
+		m_pickSW.show();
+		m_pickIF.show();
+		m_pickNL.show();
+		m_pickBA.show();
+		m_pickIH.show();
+		m_pickWE.show();
+		m_pickUM.show();
+		m_pickDG.show();
+		m_pickTS.show();
+		m_pickBL.show();
+		m_pickWB.show();
+		m_pickS.show();
+		m_pickRG.show();
+		m_pickAL.show();
+
 		m_ipInput.show();
 		m_usernameInput.show();
 
@@ -727,6 +930,25 @@ void Window::changeState(windowState _State)
 		m_S.hide();
 		m_RG.hide();
 		m_AL.hide();
+
+		m_pickDA.hide();
+		m_pickEC.hide();
+		m_pickIW.hide();
+		m_pickWS.hide();
+		m_pickSW.hide();
+		m_pickIF.hide();
+		m_pickNL.hide();
+		m_pickBA.hide();
+		m_pickIH.hide();
+		m_pickWE.hide();
+		m_pickUM.hide();
+		m_pickDG.hide();
+		m_pickTS.hide();
+		m_pickBL.hide();
+		m_pickWB.hide();
+		m_pickS.hide();
+		m_pickRG.hide();
+		m_pickAL.hide();
 
 		m_ipInput.hide();
 		m_usernameInput.hide();

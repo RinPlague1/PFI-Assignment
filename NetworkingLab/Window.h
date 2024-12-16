@@ -41,11 +41,37 @@ private:
 
 	windowState m_currentState;
 
+	
+
 	Fl_PNG_Image m_terraBG;
 	Fl_Box m_terraBGBox;
 
+	Fl_Menu_Bar m_menuBar;
+
 	Fl_Button m_ServerButton;
 	Fl_Button m_ClientButton;
+
+	Fl_Button m_pickDA;
+	Fl_Button m_pickEC;
+	Fl_Button m_pickIW;
+	Fl_Button m_pickWS;
+	Fl_Button m_pickSW;
+	Fl_Button m_pickIF;
+	Fl_Button m_pickNL;
+	Fl_Button m_pickBA;
+	Fl_Button m_pickIH;
+	Fl_Button m_pickWE;
+	Fl_Button m_pickUM;
+	Fl_Button m_pickDG;
+	Fl_Button m_pickTS;
+	Fl_Button m_pickBL;
+	Fl_Button m_pickWB;
+	Fl_Button m_pickS;
+	Fl_Button m_pickRG;
+	Fl_Button m_pickAL;
+
+
+
 
 	Fl_Box m_logoBox;
 	Fl_Text_Display m_IpDisplayBox;
@@ -81,6 +107,8 @@ private:
 	Fl_PNG_Image m_ravenguard;
 	Fl_PNG_Image m_alphaLegion;
 
+	//Fl_PNG_Image m_windowIcon;
+
 	//img boxes
 	Fl_Box m_DA;
 	Fl_Box m_EC;
@@ -103,7 +131,6 @@ private:
 
 	Fl_Input m_usernameInput;
 	
-
 	Fl_Input m_ipInput;
 
 	Message m_incomingMessage;
@@ -114,9 +141,10 @@ public:
 	Window();
 	~Window();
 
-	static void createServerOnClick(Fl_Widget* _widget, void* _userData);
-	void createClient();
+	static void staticCreateServer(Fl_Widget* _widget, void* _userData);
+	void createServer();
 
+	void createClient();
 	static void StaticCreateClient(Fl_Widget* _widget, void* _userData);
 	
 	void interperateMessage(std::string _message);
@@ -129,8 +157,26 @@ public:
 
 	static void usernameInput(Fl_Widget* _widget, void* _userData);
 	
-	
+	static void legionDA(Fl_Widget* _widget, void* _userData);
+	static void legionEC(Fl_Widget* _widget, void* _userData);
+	static void legionIW(Fl_Widget* _widget, void* _userData);
+	static void legionWS(Fl_Widget* _widget, void* _userData);
+	static void legionSW(Fl_Widget* _widget, void* _userData);
+	static void legionIF(Fl_Widget* _widget, void* _userData);
+	static void legionNL(Fl_Widget* _widget, void* _userData);
+	static void legionBA(Fl_Widget* _widget, void* _userData);
+	static void legionIH(Fl_Widget* _widget, void* _userData);
+	static void legionWE(Fl_Widget* _widget, void* _userData);
+	static void legionUM(Fl_Widget* _widget, void* _userData);
+	static void legionDG(Fl_Widget* _widget, void* _userData);
+	static void legionTS(Fl_Widget* _widget, void* _userData);
+	static void legionBL(Fl_Widget* _widget, void* _userData);
+	static void legionWB(Fl_Widget* _widget, void* _userData);
+	static void legionS(Fl_Widget* _widget, void* _userData);
+	static void legionRG(Fl_Widget* _widget, void* _userData);
+	static void legionAL(Fl_Widget* _widget, void* _userData);
 
+	static void returnToMenu(Fl_Widget* _widget, void* _userData);
 
 	void changeState(windowState _State);
 
