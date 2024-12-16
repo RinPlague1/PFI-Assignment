@@ -22,6 +22,7 @@ Fl_Text_Display::Style_Table_Entry styleTable[19] = {
 	{fl_rgb_color(36, 36, 36)},
 	{fl_rgb_color(0, 169, 156)}
 };
+//^ holds the rgb values of the username text colours
 
 Window::Window() :
 	Fl_Window(1920, 1080, "Legion Chat")
@@ -56,6 +57,8 @@ Window::Window() :
 	, m_chatLog(725, 100, 434, 650)
 	, m_chatBuffer()
 	, m_chatStyleBuffer()
+	, m_ClientVersion(505,900,200,100)
+	, m_versionInfo()
 	, m_message(725, 750, 434, 100)
 	, m_Server(nullptr)
 	, m_Client(nullptr)
@@ -77,7 +80,6 @@ Window::Window() :
 	, m_salamanders("images/Salamanders_Eradicator-750x563.png")
 	, m_ravenguard("images/RavenGuard_Reiver-750x563.png")
 	, m_alphaLegion("images/Alpha_Legion.png")
-	/*, m_windowIcon("images/titusSelfie.png")*/
 	, m_DA(100, 100, 181, 141)
 	, m_EC(1359, 100, 181, 141)
 	, m_IW(1359, 251, 181, 141)
@@ -104,15 +106,15 @@ Window::Window() :
 {
 	Fl::scheme("gtk+");
 	
-	m_menuBar.add("&File/Return To Menu", "^o", returnToMenu, this);
+	m_menuBar.add("&File/Return To Menu", "^o", returnToMenu, this);	//creates the menu bar
 
-	m_terraBGBox.box(FL_DOWN_BOX);
+	m_terraBGBox.box(FL_DOWN_BOX);	//background box 
 	if (m_terraBG.fail())
 	{
 		throw std::runtime_error("terra Failed");
 	}
 
-	m_terraBGBox.image(m_terraBG);
+	m_terraBGBox.image(m_terraBG);	//applies image to box
 
 	m_DA.box(FL_DOWN_BOX);
 	if (m_darkAngels.fail())
@@ -206,7 +208,8 @@ Window::Window() :
 	{
 		throw std::runtime_error("Alpha Legion Failed");
 	}
-
+	// ^ all legion boxes
+	 
 	m_DA.image(m_darkAngels);
 	m_WS.image(m_whiteScars);
 	m_SW.image(m_spaceWolves);
@@ -226,10 +229,11 @@ Window::Window() :
 	m_BL.image(m_blackLegion);
 	m_WB.image(m_wordBearers);
 	m_AL.image(m_alphaLegion);
+	// ^ applies all images to boxes
 
-
-	m_IpTextBuffer.text("IP address: 127.0.0.1");
+	m_IpTextBuffer.text("IP address: 127.0.0.1");	// creates a display to show the user the ip on the host screen
 	m_IpDisplayBox.buffer(m_IpTextBuffer);
+
 	
 	m_ServerButton.callback(staticCreateServer, this);
 	m_ClientButton.callback(StaticCreateClient, this);
@@ -252,9 +256,9 @@ Window::Window() :
 	 m_pickS.callback(legionS, this);
 	 m_pickRG.callback(legionRG, this);
 	 m_pickAL.callback(legionAL, this);
+	 // ^legion choice button functions applied
 
-
-	m_ipInput.callback(enteredIpAddress, this);
+	m_ipInput.callback(enteredIpAddress, this);		// text inputs that register on pressing enter
 	m_ipInput.when(FL_WHEN_ENTER_KEY);
 
 	m_message.callback(sendMessage, this);
@@ -264,7 +268,7 @@ Window::Window() :
 	m_usernameInput.when(FL_WHEN_ENTER_KEY);
 
 
-	this->changeState(m_currentState);
+	this->changeState(m_currentState);	//makes the state the main menu
 	
 }
 
@@ -276,14 +280,14 @@ Window::~Window()
 
 void Window::staticCreateServer(Fl_Widget* _widget, void* _userData)
 {
-	Window* mainWindow = (Window*)_userData;
+	Window* mainWindow = (Window*)_userData;	//calls the create server function
 	mainWindow->createServer();
 }
 
 void Window::createServer()
 {
 	m_Server = new Server();
-	std::cout << "server created";
+	std::cout << "server created";	//allows for not needing pointers
 
 	m_currentState = hosting;
 	changeState(m_currentState);
@@ -292,59 +296,54 @@ void Window::createServer()
 void Window::StaticCreateClient(Fl_Widget* _widget, void* _userData)
 {
 	Window* mainWindow = (Window*)_userData;
-	mainWindow->createClient();
-
+	mainWindow->createClient();	//same as static client
 	
 }
 
 void Window::createClient()
 {
-	m_Client = std::make_shared<Client>(this);
+	m_Client = std::make_shared<Client>(this);	// creates a client pointer
 	m_currentState = join;
 	changeState(m_currentState);
 }
 
+
 void Window::addToLog(std::string _buffer)
 {
-	if (msgCount > 0)
+	if (msgCount > 0)	//checks it isnt the static server info
 	{
-		interperateMessage(_buffer);
+		interperateMessage(_buffer);	// decodes the message
 
 		std::cout << m_incomingMessage.getLegion() << std::endl;
 		
-
-
 		m_chatBuffer.append(m_incomingMessage.getUsername().c_str());
 		m_chatBuffer.append(": ");
+		m_chatLog.buffer(m_chatBuffer);	//adds the username + : to the display window
+		
+		m_chatLog.highlight_data(&m_chatStyleBuffer, styleTable, 19, 'A', nullptr, nullptr);	//assosiates the style buffer with the chatlog
+
+		setColour();	//writes to the style buffer depending on which legion id is selected
+
+
+		m_chatBuffer.append(m_incomingMessage.getMessage().c_str());	//appends the rest of the message and displays it
 		m_chatLog.buffer(m_chatBuffer);
 		
 
-		m_chatLog.highlight_data(&m_chatStyleBuffer, styleTable, 19, 'A', nullptr, nullptr);
-
-		setColour();
-
-		//fl_color(0, 0, 0);
-		m_chatBuffer.append(m_incomingMessage.getMessage().c_str());
-		m_chatLog.buffer(m_chatBuffer);
-		
-
-		for (int i = 0; i < m_incomingMessage.getMessage().length() + 1; i++)
+		for (int i = 0; i < m_incomingMessage.getMessage().length() + 1; i++)	// makes the rest of the message text standard black again		
 		{
 			m_chatStyleBuffer.append("A");
 		}
 
 		m_chatBuffer.append("\n");
-		m_chatStyleBuffer.append("\n");
-
+		m_chatStyleBuffer.append("\n");	//applies a new line to both buffers
 		
-
-		m_chatLog.buffer(m_chatBuffer);
+		m_chatLog.buffer(m_chatBuffer);	//displays the final text
 
 		
 	} 
 	else 
 	{
-		for (int i = 0; i < _buffer.length(); i++)
+		for (int i = 0; i < _buffer.length(); i++)	//ensures the server info is black
 		{
 			m_chatStyleBuffer.append("A");
 		}
@@ -353,28 +352,27 @@ void Window::addToLog(std::string _buffer)
 		m_chatLog.buffer(m_chatBuffer);
 		m_chatBuffer.append("\n");
 		m_chatStyleBuffer.append("\n");
-		msgCount += 1;
+		msgCount += 1;	// allows for the interperated function to run without breaking
 	}
 	
 }
-
 
 void Window::enteredIpAddress(Fl_Widget* _widget, void* _userData)
 {
 	Window* mainWindow = (Window*)_userData;
 	
-	if (mainWindow->m_Client->m_clientSocket.getUsername() == "§")
+	if (mainWindow->m_Client->m_clientSocket.getUsername() == "§")	//checks to see if the username is still undefined
 	{
 		Window* mainWindow = (Window*)_userData;
 
 		std::string usernameBuffer;
-		usernameBuffer = mainWindow->m_usernameInput.value();
+		usernameBuffer = mainWindow->m_usernameInput.value();	//if there is anything in the usernam input its applied to the variable
 		std::cout << "username: " << usernameBuffer << std::endl;
 
 		mainWindow->m_Client->m_clientSocket.setUsername(usernameBuffer);
 		mainWindow->m_usernameInput.value("");
 
-		if (mainWindow->m_Client->m_clientSocket.getUsername() == "")
+		if (mainWindow->m_Client->m_clientSocket.getUsername() == "")	//if its blank then the client is given a default name
 		{
 			mainWindow->m_Client->m_clientSocket.setUsername("Anonymous Client");
 		}
@@ -382,15 +380,27 @@ void Window::enteredIpAddress(Fl_Widget* _widget, void* _userData)
 
 	std::string buffer;
 	buffer = mainWindow->m_ipInput.value();
-	bool validIp = mainWindow->m_Client->m_clientSocket.connectFunction(buffer);
+	bool validIp = mainWindow->m_Client->m_clientSocket.connectFunction(buffer);	//gives the ip to the client socket to search for
 	if (validIp == false)
 	{
-		mainWindow->m_ipInput.value("");
+		mainWindow->m_ipInput.value("");	// empties the input box
 	}
 	else
 	{
 		mainWindow->m_ipInput.value("");
 		mainWindow->m_currentState = room;
+
+		mainWindow->m_versionInfo.text("");
+		mainWindow->m_versionInfo.append("Client Version: V10.342.02");
+		mainWindow->m_versionInfo.append("\n");
+		mainWindow->m_versionInfo.append("Username: ");
+		mainWindow->m_versionInfo.append(mainWindow->m_Client->m_clientSocket.getUsername().c_str());
+		mainWindow->m_versionInfo.append("\n");
+		mainWindow->m_versionInfo.append("Legion: ");
+		mainWindow->m_versionInfo.append(mainWindow->m_Client->m_clientSocket.getLegion().c_str());	//adds data to the client info box
+
+		mainWindow->m_ClientVersion.buffer(mainWindow->m_versionInfo);
+
 		mainWindow->changeState(mainWindow->m_currentState);
 	}
 
@@ -404,11 +414,11 @@ void Window::sendMessage(Fl_Widget* _widget, void* _userData)
 	msgBuffer = mainWindow->m_message.value();
 
 	Message* newMessage = new Message(mainWindow->m_Client->m_clientSocket.getUsername(), mainWindow->m_Client->m_clientSocket.getLegion(), msgBuffer);
-	std::string messageSend = newMessage->xmlToString();
+	std::string messageSend = newMessage->xmlToString();	//creates a message obj and the makes it a string to send over the socket
 
 	std::cout << "message sending: " << newMessage << std::endl;
 	mainWindow->m_Client->m_clientSocket.send(messageSend);
-	mainWindow->m_message.value("");
+	mainWindow->m_message.value(""); //clears the input once sent
 	
 }
 
@@ -420,7 +430,7 @@ void Window::usernameInput(Fl_Widget* _widget, void* _userData)
 	usernameBuffer = mainWindow->m_usernameInput.value();
 	std::cout << "username: " << usernameBuffer << std::endl;
 
-	mainWindow->m_Client->m_clientSocket.setUsername(usernameBuffer);
+	mainWindow->m_Client->m_clientSocket.setUsername(usernameBuffer);	//takes the input value and makes it the username in client socket
 	mainWindow->m_usernameInput.value("");
 
 
@@ -428,15 +438,15 @@ void Window::usernameInput(Fl_Widget* _widget, void* _userData)
 
 void Window::interperateMessage(std::string _message)
 {
-	std::string nullKey("§");
+	std::string nullKey("§");	//searches the message for the key
 	std::size_t usernameSection = _message.find(nullKey);
-	std::size_t legionSection = _message.find(nullKey, usernameSection + 1);
+	std::size_t legionSection = _message.find(nullKey, usernameSection + 1);	//creats the message sections
 
 	std::cout << "whole message: " << _message << std::endl;
 
 	std::string usernameData;
 
-	for (int i = 0; i < usernameSection; i++)
+	for (int i = 0; i < usernameSection; i++)	//goes through the whole section and adds each char to a new string
 	{
 		usernameData = usernameData + _message[i];
 	}
@@ -445,7 +455,7 @@ void Window::interperateMessage(std::string _message)
 
 	std::string legionData;
 
-	for (int i = usernameSection + 1; i < legionSection; i++)
+	for (int i = usernameSection + 1; i < legionSection; i++)//same for each section
 	{
 		legionData = legionData + _message[i];
 	}
@@ -460,7 +470,7 @@ void Window::interperateMessage(std::string _message)
 	}
 	std::cout << "MessageData: " << messageData << std::endl;
 
-	m_incomingMessage.rewriteMessage(usernameData, legionData, messageData);
+	m_incomingMessage.rewriteMessage(usernameData, legionData, messageData);	// applies the data to the message attribue of window
 
 
 }
@@ -468,23 +478,23 @@ void Window::interperateMessage(std::string _message)
 void Window::setColour()
 {
 	std::string colourId;
-	colourId = colourId + m_incomingMessage.getLegion();
+	colourId = colourId + m_incomingMessage.getLegion();	// gets legion id
 	int usernameLength = 0;
 
-	if (colourId == "1")
+	if (colourId == "1")	// for each id its sorted
 	{	
 
-		for (int i = 0; i < m_incomingMessage.getUsername().length() + 1; i++)
+		for (int i = 0; i < m_incomingMessage.getUsername().length() + 1; i++)	//goes through the username and adds the : on to it
 		{
-			m_chatStyleBuffer.append("B");
+			m_chatStyleBuffer.append("B");	//sets the style in the style buffer
 		}
 
 		std::cout << "style buffer: " << m_chatStyleBuffer.text() << std::endl;
-		m_chatLog.redraw();
+		m_chatLog.redraw();	//redraws the chatlog with the new colour info
 
 	}
 
-	if (colourId == "2")
+	if (colourId == "2")	//same as previous
 	{
 		for (int i = 0; i < m_incomingMessage.getUsername().length() + 1; i++)
 		{
@@ -691,11 +701,12 @@ void Window::setColour()
 
 }
 
+//sets the legion id based on which button was clicked - each one corresponds to a different button
 void Window::legionDA(Fl_Widget* _widget, void* _userData)
 {
 	Window* mainWindow = (Window*)_userData;
 	mainWindow->m_Client->m_clientSocket.setLegion("1");
-}
+}	  
 void Window::legionEC(Fl_Widget* _widget, void* _userData)
 {
 	Window* mainWindow = (Window*)_userData;
@@ -782,6 +793,7 @@ void Window::legionAL(Fl_Widget* _widget, void* _userData)
 	mainWindow->m_Client->m_clientSocket.setLegion("18");
 }
 
+//sets the program back to the starting state of the main menu
 void Window::returnToMenu(Fl_Widget* _widget, void* _userData)
 {
 	Window* mainWindow = (Window*)_userData;
@@ -798,17 +810,22 @@ void Window::returnToMenu(Fl_Widget* _widget, void* _userData)
 	
 	mainWindow->m_Client = nullptr;
 	
+	mainWindow->msgCount = 0;
+	mainWindow->m_chatBuffer.text("");
+	mainWindow->m_chatLog.buffer(mainWindow->m_chatBuffer);
 
 	mainWindow->changeState(menu);
 }
 
 void Window::changeState(windowState _State)
 {
-	switch (_State)
+	switch (_State)	//switches the states based on which state is current
 	{
-	case menu:
+	case menu:					//shows and hides widgets based on what is displayed on the screen currently
 		m_ServerButton.show();
 		m_ClientButton.show();
+
+		m_ClientVersion.hide();
 
 		m_DA.hide();
 		m_EC.hide();
@@ -953,6 +970,8 @@ void Window::changeState(windowState _State)
 		m_ipInput.hide();
 		m_usernameInput.hide();
 
+		m_ClientVersion.show();
+
 		m_chatLog.show();
 		m_message.show();
 
@@ -960,4 +979,9 @@ void Window::changeState(windowState _State)
 	default:
 		break;
 	}
+}
+
+int Window::returnMsgCount()
+{
+	return msgCount;
 }

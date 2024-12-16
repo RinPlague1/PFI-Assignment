@@ -15,7 +15,7 @@ ServerSocket::ServerSocket(int _port)
 	hints.ai_family = AF_INET;
 	hints.ai_socktype = SOCK_STREAM;
 	hints.ai_protocol = IPPROTO_TCP;
-	hints.ai_flags = AI_PASSIVE;
+	hints.ai_flags = AI_PASSIVE;	//sets up the server
 
 	addrinfo* result = NULL;
 
@@ -45,7 +45,7 @@ ServerSocket::ServerSocket(int _port)
 	}
 
 	u_long mode = 1;
-	if (ioctlsocket(m_socket, FIONBIO, &mode) == SOCKET_ERROR)
+	if (ioctlsocket(m_socket, FIONBIO, &mode) == SOCKET_ERROR)	// non-blocking mode
 	{
 		throw std::runtime_error("Failed to set non-blocking");
 	}
@@ -54,7 +54,7 @@ ServerSocket::ServerSocket(int _port)
 
 ServerSocket::~ServerSocket()
 {
-	std::cout << "closing server";
+	std::cout << "closing server";	//kills the server
 	closesocket(m_socket);
 }
 

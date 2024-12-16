@@ -27,6 +27,7 @@ struct ClientSocket
 	std::string getUsername();
 	std::string getLegion();
 
+	//std::string rot13Encryption(std::string _sendingMessage);
 
 private:
 	friend struct ServerSocket;

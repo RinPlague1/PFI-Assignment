@@ -4,7 +4,7 @@
 
 Wsa::Wsa()
 {
-	if (WSAStartup(MAKEWORD(2, 2), &m_wsadata) != 0)
+	if (WSAStartup(MAKEWORD(2, 2), &m_wsadata) != 0)	//starts winsock
 	{
 		throw std::runtime_error("Failed to initialize Winsock");
 	}

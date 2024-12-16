@@ -84,6 +84,9 @@ private:
 
 	Fl_Input m_message;
 
+	Fl_Text_Display m_ClientVersion;
+	Fl_Text_Buffer m_versionInfo;
+
 	Server* m_Server;
 	std::shared_ptr<Client> m_Client;
 
@@ -179,6 +182,8 @@ public:
 	static void returnToMenu(Fl_Widget* _widget, void* _userData);
 
 	void changeState(windowState _State);
+
+	int returnMsgCount();
 
 };
 

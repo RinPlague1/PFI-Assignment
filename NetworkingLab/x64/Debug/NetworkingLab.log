@@ -1,7 +1,37 @@
-﻿  Window.cpp
-D:\S5611581\PFI-Assignment\NetworkingLab\ClientSocket.h(8,10): warning C4067: unexpected tokens following preprocessor directive - expected a newline
+﻿  Client.cpp
+C:\Users\omcca\Documents\GitHub\PFI-Assignment\NetworkingLab\ClientSocket.h(8,10): warning C4067: unexpected tokens following preprocessor directive - expected a newline
+  (compiling source file 'Client.cpp')
+  
+  ClientSocket.cpp
+C:\Users\omcca\Documents\GitHub\PFI-Assignment\NetworkingLab\ClientSocket.h(8,10): warning C4067: unexpected tokens following preprocessor directive - expected a newline
+  (compiling source file 'ClientSocket.cpp')
+  
+C:\Users\omcca\Documents\GitHub\PFI-Assignment\NetworkingLab\ClientSocket.cpp(91,64): warning C4267: 'argument': conversion from 'size_t' to 'int', possible loss of data
+  main.cpp
+C:\Users\omcca\Documents\GitHub\PFI-Assignment\NetworkingLab\ClientSocket.h(8,10): warning C4067: unexpected tokens following preprocessor directive - expected a newline
+  (compiling source file 'main.cpp')
+  
+  Message.cpp
+  pugixml.cpp
+  Server.cpp
+C:\Users\omcca\Documents\GitHub\PFI-Assignment\NetworkingLab\ClientSocket.h(8,10): warning C4067: unexpected tokens following preprocessor directive - expected a newline
+  (compiling source file 'Server.cpp')
+  
+C:\Users\omcca\Documents\GitHub\PFI-Assignment\NetworkingLab\Server.cpp(76,13): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
+C:\Users\omcca\Documents\GitHub\PFI-Assignment\NetworkingLab\Server.cpp(85,13): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
+  ServerSocket.cpp
+C:\Users\omcca\Documents\GitHub\PFI-Assignment\NetworkingLab\ClientSocket.h(8,10): warning C4067: unexpected tokens following preprocessor directive - expected a newline
+  (compiling source file 'ServerSocket.cpp')
+  
+C:\Users\omcca\Documents\GitHub\PFI-Assignment\NetworkingLab\ServerSocket.cpp(34,44): warning C4267: 'argument': conversion from 'size_t' to 'int', possible loss of data
+  Timer.cpp
+  Window.cpp
+C:\Users\omcca\Documents\GitHub\PFI-Assignment\NetworkingLab\ClientSocket.h(8,10): warning C4067: unexpected tokens following preprocessor directive - expected a newline
   (compiling source file 'Window.cpp')
   
-D:\S5611581\PFI-Assignment\NetworkingLab\Window.cpp(448,13): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
-D:\S5611581\PFI-Assignment\NetworkingLab\Window.cpp(457,13): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
-  NetworkingLab.vcxproj -> D:\S5611581\PFI-Assignment\x64\Debug\NetworkingLab.exe
+C:\Users\omcca\Documents\GitHub\PFI-Assignment\NetworkingLab\Window.cpp(458,13): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
+C:\Users\omcca\Documents\GitHub\PFI-Assignment\NetworkingLab\Window.cpp(467,13): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
+  Wsa.cpp
+  Generating Code...
+LINK : warning LNK4098: defaultlib 'MSVCRT' conflicts with use of other libs; use /NODEFAULTLIB:library
+  NetworkingLab.vcxproj -> C:\Users\omcca\Documents\GitHub\PFI-Assignment\x64\Debug\NetworkingLab.exe

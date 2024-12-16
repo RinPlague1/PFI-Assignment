@@ -9,7 +9,7 @@
  
 void onClick(Fl_Widget* _widget, void* _userData)
 {
-	Fl_Window* win = (Fl_Window*)_userData;
+	Fl_Window* win = (Fl_Window*)_userData;	//hangles the close button on the window
 	win->hide();
 }
 
@@ -17,24 +17,7 @@ int main(int argc, char* argv[])
 {
 		Window mainWindow;
 		mainWindow.show();
-
-
-
+		FreeConsole();
 		return Fl::run();
 
 }
-
-/*
-if (client)
-{
-	printf("Client Connected!\n");
-	clients.push_back(client);
-}
-
-std::string message;
-client->receive(message);
-printf("Recieved: %s\n", message.c_str());
-
-client->send("message from server");
-printf("Sent our message\n");
-*/

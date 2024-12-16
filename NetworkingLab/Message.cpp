@@ -7,9 +7,7 @@ Message::Message(std::string _username, std::string _legion, std::string _messag
 
 
 {
-	
-	
-	pugi::xml_node root = m_newMessage.append_child("userData");
+	pugi::xml_node root = m_newMessage.append_child("userData");	//creates an xml doc of the sent message
 	pugi::xml_node info = root.append_child("info");
 	pugi::xml_node username = info.append_child("username");
 	pugi::xml_node legion = info.append_child("legion");
@@ -34,7 +32,7 @@ Message::~Message()
 std::string Message::xmlToString()
 {
 
-	m_newMessage.save_file("test.xml");
+	m_newMessage.save_file("test.xml");	//saves the current sent message as a doc
 
 	pugi::xml_node search = m_newMessage.child("userData");
 	pugi::xml_node searchInfo = search.child("info");
@@ -55,24 +53,13 @@ std::string Message::xmlToString()
 	std::cout << outMessage << " -> end message" << std::endl;
 
 	std::string message;
-	message = outUsername + "§" + outLegion + "§" + outMessage;
+	message = outUsername + "§" + outLegion + "§" + outMessage;	//adds the separating characters
 
 	return message;
 }
 
 void Message::rewriteMessage(std::string _username, std::string _legion, std::string _message)
 {
-	//pugi::xml_node root = m_newMessage.append_child("userData");
-	//pugi::xml_node info = root.append_child("info");
-	//pugi::xml_node username = info.append_child("username");
-	//pugi::xml_node legion = info.append_child("legion");
-
-	//pugi::xml_node message = root.append_child("message");
-
-	//username.append_attribute("username").set_value(_username.c_str());
-	//legion.append_attribute("id").set_value(_legion.c_str());
-
-	//message.append_attribute("text").set_value(_message.c_str());
 
 	m_username = _username;
 	m_legion = _legion;

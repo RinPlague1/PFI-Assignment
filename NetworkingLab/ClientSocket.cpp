@@ -5,10 +5,10 @@
 #include <iostream>
 
 ClientSocket::ClientSocket()
-	: m_socket(INVALID_SOCKET)
+	: m_socket(INVALID_SOCKET)	//assigns all the standard user data to the socket
 	, m_closed(false)
 	, m_username("§")
-	, m_legion("§")
+	, m_legion("1")
 	, m_connected(false)
 
 {
@@ -40,25 +40,20 @@ ClientSocket::ClientSocket()
 
 	}
 
-	/*u_long mode = 1;
-	if (ioctlsocket(m_clientSocket, FIONBIO, &mode) == SOCKET_ERROR)
-	{
-		throw std::runtime_error("Failed to set non-blocking");
-	}*/
 }
 
 ClientSocket::~ClientSocket()
 {
 	if (m_socket != INVALID_SOCKET)
 	{
-		closesocket(m_socket);
+		closesocket(m_socket);	//closes socket when disconnected
 	}
 }
 
 
 void ClientSocket::nonBlocking()
 {
-	u_long mode = 1;
+	u_long mode = 1;	//sets nonBlocking
 	if (ioctlsocket(m_socket, FIONBIO, &mode) == SOCKET_ERROR)
 	{
 		throw std::runtime_error("Failed to set non-blocking");
@@ -69,7 +64,7 @@ void ClientSocket::nonBlocking()
 bool ClientSocket::receive(std::string& _message)
 {
 	char buffer[512] = { 0 };
-	int bytes = ::recv(m_socket, buffer, sizeof(buffer) - 1, 0);
+	int bytes = ::recv(m_socket, buffer, sizeof(buffer) - 1, 0);	//general recieve function from winsock
 	if (bytes == SOCKET_ERROR)
 	{
 		if (WSAGetLastError() != WSAEWOULDBLOCK)
@@ -89,9 +84,9 @@ bool ClientSocket::receive(std::string& _message)
 
 int ClientSocket::send(const std::string& _message)
 {
+	//std::string encryptedMessage = rot13Encryption(_message);
+	// ^ rot 13 encryption call
 
-	/*Message* newMessage = new Message(m_username, m_legion, _message);
-	newMessage->xmlToString();*/
 
 	int bytes = ::send(m_socket, _message.c_str(), _message.length(), 0);
 	if (bytes <= 0)
@@ -114,21 +109,23 @@ bool ClientSocket::connectFunction(std::string _ipInput)
 	ClientService.sin_addr.s_addr = inet_addr(_ipInput.c_str());
 	ClientService.sin_port = htons(8080);
 
+	//searches for the ip entered on the given port
+
 	if (connect(m_socket, reinterpret_cast<SOCKADDR*>(&ClientService), sizeof(ClientService)) == SOCKET_ERROR)
 	{
 		std::cout << "Client: connect - Failed to connect: " << WSAGetLastError() << std::endl;
 		fl_alert("Invalid IP");
 		m_connected = false;
-		return false;
+		return false;	//checks if connected then doesnt allow the connected loop to run for the client
 	}
 	else
 	{
-
 		std::cout << "Client: Connect is OK!" << std::endl;
 		std::cout << "Client: Can start sending and receiving data..." << std::endl;
 
 		nonBlocking();
-		m_connected = true;
+
+		m_connected = true;	//allows the connected loop to run
 		return true;
 
 	}
@@ -155,3 +152,35 @@ std::string ClientSocket::getLegion()
 {
 	return m_legion;
 }
+
+//std::string ClientSocket::rot13Encryption(std::string _sendingMessage)
+//{
+//	std::string encrypted;
+//	for (int i = 0; i < _sendingMessage.length(); i++)
+//	{
+//		char decryptedChar = int(_sendingMessage[i]) + 13;
+//
+//		if (decryptedChar > 90)
+//		{
+//			decryptedChar = 65 + (int(decryptedChar) - 90);
+//		}
+//
+//		if (decryptedChar > 122)
+//		{
+//			decryptedChar = 97 + (int(decryptedChar) - 122);
+//		}
+//
+//		if (decryptedChar == 167)
+//		{
+//			decryptedChar = 167;
+//		}
+//
+//		encrypted = encrypted + decryptedChar;
+//	}
+//
+//	std::cout<< "encrypted text: " << encrypted << std::endl;
+//
+//	return encrypted;
+//}
+
+// ^ attempt at rot13 encryption

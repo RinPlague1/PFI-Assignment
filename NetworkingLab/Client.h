@@ -36,6 +36,7 @@ public:
 	Client(Window* _windowPtr);
 	~Client();
 	void on_tick();
+	//std::string rot13Decryption(std::string _recievedMessage);
 	
 	
 
